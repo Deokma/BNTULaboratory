@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #008054; /* BNTU Green */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: right; /* Выравнивание элементов вправо */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    text-align: left; /* Выравнивание текста метки влево */
+}
+
+input[type="text"],
+input[type="username"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Учитываем padding в общей ширине элемента */
+}
+
+input[type="submit"] {
+    width: 50%; /* Ширина кнопки */
+    margin: 0 auto; /* Центрирование кнопки */
+    display: block; /* Делаем кнопку блочным элементом */
+    padding: 10px;
+    background-color: #006642; /* Darker BNTU Green */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #025638; /* Darkest BNTU Green */
+}
+
+

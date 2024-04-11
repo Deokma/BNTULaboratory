@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить проект</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            padding-top: 6rem;
+        }
+        .card {
+            background-color: #e9ecef; /* светло-серый */
+            color: #212529; /* черный */
+        }
+        .form-control {
+            background-color: #f1f3f5; /* серый */
+            color: #212529; /* черный */
+        }
+        .btn-success {
+            background-color: #198754; /* зеленый */
+            border-color: #198754; /* зеленый */
+        }
+        .btn-success:hover {
+            background-color: #157347; /* темно-зеленый */
+            border-color: #157347; /* темно-зеленый */
+        }
+    </style>
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div class="container mt-2">
+    <div class="card">
+        <h1 class="card-header">Добавить проект</h1>
+        <div class="card-body">
+            <form action="/project/add" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title" class="text-dark">Заголовок:</label>
+                    <input type="text" name="title" id="title" placeholder="Введите заголовок" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="content" class="text-dark">Содержимое:</label>
+                    <textarea name="content" id="content" placeholder="Введите содержимое" class="form-control" required></textarea>
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="description" class="text-dark">Описание:</label>-->
+<!--                    <textarea name="description" id="description" placeholder="Введите описание" class="form-control" required></textarea>-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label for="cover" class="text-dark">Обложка:</label>
+                    <!--<select id="file-type-select" class="form-control form-control-sm">
+                        <option value="file">File</option>
+                        <option value="link">Link</option>
+                    </select>-->
+                    <div id="file-input">
+                        <label for="file" class="text-dark">Загрузите Файл:</label>
+                        <input type="file" name="cover" id="file" class="form-control-file">
+                    </div>
+                    <!--<div id="link-input" style="display:none;">
+                        <label for="coverLink" class="text-dark">Enter Link:</label>
+                        <input type="text" name="coverLink" id="coverLink" class="form-control">
+                    </div>-->
+                </div>
+                <div class="form-group">
+                    <label for="tagsInput" class="text-dark">Tags:</label>
+                    <select id="tagsInput" multiple="multiple" class="form-control js-example-basic-multiple" style="width:100%">
+                        <!-- Use Thymeleaf to generate options based on data from the database -->
+                        <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+                    </select>
+                </div>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <button type="submit" class="btn btn-success">Add Project</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tagsInput').select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            placeholder: 'Type or select tags',
+        });
+
+        // Add event handler for form submission
+        $('form').submit(function() {
+            var tags = $('#tagsInput').val(); // Get selected tag values
+            // Create hidden form field and set its value
+            $('<input>').attr({
+                type: 'hidden',
+                name: 'tags',
+                value: tags
+            }).appendTo('form');
+        });
+    });
+
+    var fileInput = document.getElementById("file-input");
+    var linkInput = document.getElementById("link-input");
+    var fileTypeSelect = document.getElementById("file-type-select");
+
+    fileTypeSelect.addEventListener("change", function () {
+        if (this.value === "file") {
+            fileInput.style.display = "block";
+            linkInput.style.display = "none";
+        } else {
+            fileInput.style.display = "none";
+            linkInput.style.display = "block";
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,501 @@
+body{
+    margin: 0 auto;
+    background-color: #f4eff5;
+    font-family: "Roboto";
+}
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    margin-right: 5px; /* Добавляем небольшое пространство между тегами */
+}
+
+.tag {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    border: 1px solid white; /* Устанавливаем рамку */
+    border-radius: 3rem;
+    padding: 2px 5px; /* Добавляем небольшой отступ внутри рамки */
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;
+    transform: translateY(5%)}
+    100% {opacity: 1;
+    transform: translateY(0)}
+}
+.main-wrapper{
+    margin: auto;
+    background-color: #f4eff5;
+
+}
+.main-wrapper h1 {
+    text-align: center;
+    padding-top: 10rem;
+    margin-bottom: 0;
+    font-size: 58px;
+    line-height: 1.2;
+    font-family: "Roboto Slab";
+}
+.container-large p{
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    font-size: 18px;
+    line-height: 1.2;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-family: "Roboto";
+}
+.padding-global {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+    animation: fadeIn .5s ease-in-out;
+    animation-delay: 1s;
+}
+.hero_layout.cc-hero-inner {
+    grid-column-gap: 5rem;
+    grid-row-gap: 5rem;
+    text-align: center;
+    align-items: center;
+    position: relative;
+}
+.max-width-large {
+    width: 100%;
+    max-width: 48rem;
+}
+.card{
+    display: flex;
+    /* width: 1000px; */
+    min-width: 80%;
+    margin-top: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 25px;
+    border-style: solid;
+    background-color: white;
+    position: sticky;
+    top: 7rem;
+    right: 1rem;
+    padding-top: calc(var(--index) * var(--card-top-offset));
+
+}
+:root {
+    --card-height: 40vw;
+    --card-margin: 4vw;
+    --card-top-offset: 1em;
+    --outline-width: 0px;
+}
+
+.cards{
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-in-out;
+    animation-delay: 1s;
+}
+#cards {
+    /* Make place at bottom, as items will slide to that position*/
+    padding-bottom: calc(var(--numcards) * var(--card-top-offset));
+    /* Don't include the --card-margin in padding, as that will affect the scroll-timeline*/
+    margin-bottom: var(--card-margin);
+}
+
+.card-image{
+    max-width: 50%;
+    min-width: 40%;
+    max-height: 50%;
+    min-height: 40%;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 0;
+    float: left;
+    position: relative;
+}
+.card-content{
+    position: relative;
+    float: left;
+    margin-left: 0;
+    margin-right: 5%;
+    min-width: 30%;
+    max-width: 40%;
+    min-height: 30%;
+    max-height: 40%;
+    transform-origin: 50% 0%;
+    will-change: transform;
+}
+#debug {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+}
+#debug::after {
+    content: " Show Debug";
+    margin-left: 1.5em;
+    color: white;
+    white-space: nowrap;
+}
+.card-title h2{
+    font-family: "Roboto Slab";
+}
+.card-title p{
+    font-size: 12px;
+    font-family: "Roboto";
+}
+.card-links hr{
+    border-top: 1px solid black;
+}
+.card-links a{
+    vertical-align: top;
+    color: black;
+    font-size: 14px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    font-family: "Roboto";
+    display: inline-block;
+    position: relative;
+}
+.card-links a:hover{
+    color: #008054;
+
+    text-decoration: underline;
+}
+.card-page{
+    margin-right: 3%;
+    right: 3%;
+    margin-top: .25rem;
+    color: #008054;
+    font-family: "Roboto Slab";
+}
+
+.news{
+    background-color: #008054;
+    display: flex;
+}
+.news h1{
+    font-family: "Roboto Slab";
+    font-weight: bold;
+    color: white;
+}
+.news h2{
+    font-family: "Roboto Slab";
+    font-weight: bold;
+}
+.news h3{
+    font-family: "Roboto Slab";
+    font-weight: bold;
+}
+.news p{
+    font-family: "Roboto";
+
+    border-radius: 25px;
+}
+.news a{
+    background-color: white;
+    color: black;
+    font-variation-settings: "wght"600;
+    border-radius: 25px;
+    align-items: center;
+    padding: 2% 2%;
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: .88rem;
+    transition: background-color .2s;
+    display: flex;
+}
+.news a:hover{
+    color: #6c68ad;
+}
+.news-card p{
+    font-family: "Roboto";
+}
+/*.news-card{*/
+/*    border-radius: 25px;*/
+/*    background-color: white;*/
+/*    display: flex;*/
+/*    margin-top: 1rem;*/
+
+/*    !*margin-right: 20%;*!*/
+/*    animation: fadeIn .5s ease-in-out;*/
+/*    animation-delay: .5s;*/
+/*}*/
+
+.news-card-image img{
+    border-radius: 25px;
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+.news-card-details{
+    margin: 1rem 3rem 1rem 1rem;
+}
+.news-link {
+    display: block; /* Делаем ссылку блочным элементом */
+    border-radius: 25px; /* Закругляем углы, чтобы соответствовать стилю .news-card */
+    background-color: white; /* Устанавливаем фоновый цвет */
+    margin-top: 1rem; /* Отступ сверху, если это необходимо */
+    width: 100%; /* Ширина равна 100% от родительского контейнера */
+    height: 100%; /* Высота равна 100% от родительского контейнера */
+}
+
+.news-card {
+    width: 80%; /* Ширина равна 100% от родительского контейнера */
+    border-radius: 25px; /* Закругляем углы */
+    background-color: white; /* Устанавливаем фоновый цвет */
+    margin-top: 1rem; /* Отступ сверху, если это необходимо */
+}
+
+.data-bases h1{
+    font-family: "Roboto Slab";
+    margin-right: 20%;
+}
+.db-top{
+    display: flex;
+}
+.db-top button{
+    background-color: #008054;
+    color: white;
+    font-variation-settings: "wght"600;
+    border-radius: 50px;
+    align-items: center;
+
+    font-family: "Roboto";
+    padding: 2% 2rem;
+    font-size: 16px;
+    transition: background-color .3s;
+    display: flex;
+}
+.db-top a:hover{
+    background-color: #006642;
+}
+.db-cards{
+    display: flex;
+    margin-top: 5%;
+}
+.db-card {
+    max-width: 20rem;
+    background-color: white;
+    border-radius: 25px;
+    border-style: solid;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem; /* Добавьте это, чтобы создать отступ вокруг содержимого */
+}
+
+.db-card a {
+    margin-top: auto; /* Добавьте это */
+    margin-left: 1rem;
+    color: #008054;
+    font-family: "Roboto";
+    font-weight: bold;
+}
+.db-card a:hover {
+    color: #006642;
+}
+
+.db-card h2{
+    font-family: "Roboto Slab";
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.db-card p{
+    font-family: "Roboto";
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.projects{
+    background-color: #008054;
+    border-radius: 32px;
+}
+.projects-top{
+    display: flex;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.projects-top h1{
+    color: white;
+    font-family: "Roboto Slab", serif;
+}
+.projects-top a{
+    background-color: white;
+    color: black;
+    font-variation-settings: "wght"600;
+    border-radius: 50px;
+    align-items: center;
+    padding: 3% 2%;
+    font-family: "Roboto", serif;
+
+    max-width: 14rem;
+    transition: background-color .3s;
+    display: flex;
+}
+.projects-top a:hover{
+    background-color: #006642;
+    color: white;
+    align-items: center;
+}
+.projects-top p{
+    color: white;
+}
+.online-services{
+    background-color: white;
+}
+.onl-serv-card{
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    border: solid #222222;
+    background-color: #f1f1f1;
+    display: inline-grid;
+    margin: .5rem;
+    color: #222222;
+    text-decoration: none;
+    transition: all .3s;
+}
+.onl-serv-card:hover{
+    background-color: #008054;
+    color: white;
+    fill: #ffffff;
+}
+.onl-serv-card-center{
+    margin: 2rem 1rem 1rem 1rem;
+    text-align: center;
+    display: block;
+}
+
+.events-calendar{
+    display: block;
+    flex-direction: column;
+}
+.ec-top{
+    display: flex;
+    font-family: "Roboto";
+}
+.ec-top h1{
+    font-size: 38px;
+    font-family: "Roboto Slab";
+}
+.ec-top a{
+    background-color: #008054;
+    color: white;
+    font-variation-settings: "wght"600;
+    border-radius: 50px;
+    align-items: center;
+    padding: 3% 2%;
+    font-family: "Roboto";
+
+    max-width: 14rem;
+    transition: background-color .3s;
+    display: flex;
+}
+.ec-top a:hover{
+    background-color: #006642;
+}
+.ec-cards{
+    display: flex;
+    justify-content: center;
+}
+.ec-card{
+    display: flex;
+    flex-direction: column;
+    border: solid #f4eff5;
+    border-radius: 1rem;
+    margin: .25rem .25rem .25rem .25rem;
+    transition: .2s border;
+}
+.ec-card:hover {
+    border: solid #008054;
+    transition: .2s border;
+}
+.ec-card h2{
+    padding: 0 1rem 0 1rem;
+}
+.ec-card p{
+    padding: 0 1rem 0 1rem;
+}
+
+.ec-card img{
+    margin: .25rem 1rem .25rem 1rem;
+    border-radius: 1rem;
+    border: solid white;
+}
+.tg{
+    background-color: white;
+    padding: 5% 0 5% 0;
+}
+.tg-block{
+    flex-direction: column;
+    text-align: center;
+    margin: 10% 10% 10% 10%;
+    padding: 5% 0 5% 0;
+
+    border: solid;
+    border-radius: 1rem;
+    background-color: #f1f1f1;
+    justify-content: space-between;
+    align-items: center;
+}
+.tg-block h1{
+    font-family: "Roboto Slab";
+}
+.tg-block a{
+    background-color: #008054;
+    color: white;
+    font-variation-settings: "wght"600;
+    border-radius: 2rem;
+    font-family: "Roboto", serif;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 1% 3rem;
+    font-size: 16px;
+    transition: background-color .3s;
+    text-decoration: none;
+}
+.tg-block svg{
+    display: inline-block;
+    margin: -7px 2px;
+}
+.footer{
+    background-color: #008054;
+    border: solid #008054;
+    border-radius: 1rem 1rem 0 0;
+    padding: 0 0 5%;
+}
+.footer-content{
+    font-size: 28px;
+    color: white;
+    /*margin: 10% 34% 0;*/
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.footer-links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.footer-link{
+    margin: .25rem .25rem .25rem .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: .5rem;
+    border: solid #cccccc;
+}
+.footer-link svg {
+    display: block;
+    margin: auto;
+}
