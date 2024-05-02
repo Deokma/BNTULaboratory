@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.news-content-container {
+    width: 75%;
+}
+
+.news-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.news-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.news-date {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.news-text {
+    line-height: 1.6;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+.recommended-news {
+    width: 25%;
+    padding: 20px;
+    background-color: #f0f0f0;
+}

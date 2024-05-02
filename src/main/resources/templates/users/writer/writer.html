@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writer Dashboard</title>
+    <!-- Подключение стилей Bootstrap для красивого дизайна -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Включение шапки страницы -->
+<header th:insert="~{components/header :: header}"></header>
+
+<div class="container mt-4" style="padding-top: 5rem">
+    <h2>Welcome, Writer!</h2>
+    <p>Here you can manage news, projects, events, and times.</p>
+
+    <!-- Кнопки для добавления контента -->
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <a th:href="@{news/add}" class="btn btn-primary btn-block mb-3">Add News</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{project/add}" class="btn btn-primary btn-block mb-3">Add Project</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{event/add}" class="btn btn-primary btn-block mb-3">Add Event</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{times/add}" class="btn btn-primary btn-block mb-3">Add Times</a>
+        </div>
+    </div>
+</div>
+
+<!-- Подключение скриптов Bootstrap для интерактивности -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

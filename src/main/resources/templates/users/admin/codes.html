@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Codes</title>
+</head>
+<body>
+<h2>Generate Registration Codes</h2>
+<form th:action="'/admin/generate-admin-code'" method="post">
+    <button type="submit">Generate Admin Code</button>
+</form>
+<form th:action="'/admin/generate-writer-code'" method="post">
+    <button type="submit">Generate Writer Code</button>
+</form>
+
+<h2>Current Registration Codes</h2>
+<h3>Admin Codes</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="code : ${adminCodes}">
+        <td th:text="${code.getCode()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Writer Codes</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="code : ${writerCodes}">
+        <td th:text="${code.getCode()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

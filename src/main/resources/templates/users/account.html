@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Account</title>
+    <!-- Подключение стилей Bootstrap для красивого дизайна -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Переопределение стилей для кнопок в заголовке */
+        .header-buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+<!-- Включение шапки страницы -->
+<header th:insert="~{components/header :: header}"></header>
+
+<!-- Основной контент страницы -->
+<div class="container mt-4" style="padding-top: 6rem">
+    <!-- Верхняя часть контента -->
+    <div class="row justify-content-between">
+        <div class="col-md-8">
+            <!-- Имя пользователя -->
+            <h2 th:text="${usersession.username}" class="mb-3"></h2>
+            <!-- Роли пользователя -->
+            <!--<h4>Roles:</h4>
+            <p>
+                <span th:each="role, iterStat : ${usersession.roles}"
+                      th:text="${role.getAuthority()}"
+                      th:classappend="${!iterStat.last} ? 'mr-2'"></span>
+            </p>-->
+        </div>
+        <!-- Кнопки для различных ролей -->
+        <div class="col-md-4">
+            <div class="header-buttons">
+                <!-- Кнопка для администратора -->
+                <a th:if="${isAdmin}" th:href="@{/admin}" class="btn btn-primary btn-block mb-2">Панель администратора</a>
+                <!-- Кнопка для писателя -->
+                <a th:if="${isWriter}" th:href="@{/writer}" class="btn btn-primary btn-block">Панель писателя</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Подключение скриптов Bootstrap для интерактивности -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

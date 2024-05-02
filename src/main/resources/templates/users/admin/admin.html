@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<h2 style="padding-top: 6rem" class="container text-dark">Панель администратора</h2>
+<table class="table table-light table-striped container">
+    <tr>
+        <th scope="col">Имя</th>
+        <th scope="col">Активность</th>
+        <th scope="col">Роли</th>
+        <th scope="col">Редактировать роди</th>
+        <th scope="col">Аккаунт пользователя</th>
+        <th scope="col">Блокировка</th>
+    </tr>
+
+    <div th:each="u : ${users}">
+        <tr>
+            <th th:text="${u.username}"></th>
+            <th th:text="${u.active}"></th>
+            <!--            <th>-->
+            <!--                <span th:each="role : ${u.roles}" th:text="${role.getAuthority()}" th:if="${not #strings.isEmpty(role.name)}"></span>-->
+            <!--            </th>-->
+            <th>
+    <span th:each="role, iterStat : ${u.roles}" th:text="${role.getAuthority()}"
+          th:if="${not #strings.isEmpty(role.getAuthority()) and role.getAuthority() ne 'User'}">
+    <span th:unless="${iterStat.last},">,</span>
+</span>
+
+            </th>
+            <!--            <th th:text="${u.roles}">Roles</th>-->
+            <th><a th:href="'/admin/user/edit/' + ${u.id}" class="text-dark">Роли</a></th>
+            <th><a th:href="'/user/' + ${u.id}" class="text-dark">Аккаунт</a></th>
+            <th>
+                <form th:if="${u.active}" th:action="'/admin/user/ban/' + ${u.id}" method="post">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                    <input type="submit" value="Заблокировать" class="btn btn-primary btn-danger">
+                </form>
+                <form th:unless="${u.active}" th:action="'/admin/user/unban/' + ${u.id}" method="post">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                    <input type="submit" value="Разблокировать" class="btn btn-primary btn-success">
+                </form>
+            </th>
+        </tr>
+    </div>
+</table>
+</body>
+</html>

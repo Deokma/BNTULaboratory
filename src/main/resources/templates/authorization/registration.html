@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/css/authorization.css">
+</head>
+<body>
+<div class="container">
+    <h2>Регистрация</h2>
+    <form action="/registration" method="post">
+        <div class="form-group">
+            <label>
+                Email
+            </label>
+            <input type="email" class="form-control"
+                   placeholder="Email" name="email"/>
+        </div>
+        <div class="form-group">
+            <label>
+                Пароль
+            </label>
+            <input type="password" class="form-control" name="password"
+                   placeholder="Пароль"/>
+        </div>
+        <div class="form-group">
+            <label>
+                Код доступа
+            </label>
+            <input type="text" class="form-control" name="registrationCode"
+                   placeholder="Код доступа"/>
+        </div>
+        <br>
+        <a th:href="@{/login}" style="display: block; text-align: center;">Авторизация</a>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <input type="submit" class="btn btn-flex btn-dark" value="Регистрация">
+    </form>
+</div>
+</body>
+</html>

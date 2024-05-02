@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Details</title>
+    <!-- Здесь подключите ваши стили -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Здесь может быть ваш шапка сайта -->
+<div class="container">
+    <!-- Заголовок новости -->
+    <h1 th:text="${times.get().getTitle()}" class="news-title"></h1>
+    <!-- Изображение новости -->
+<!--    <img th:src="@{/images/{id}(id=${news.getPreviewImageId()})}" alt="" class="news-image">-->
+    <!-- Дата публикации новости -->
+<!--    <p th:text="${#dates.format(project.get().getDate(), 'dd.MM.yyyy')}" class="news-date"></p>-->
+    <!-- Описание новости -->
+<!--    <p th:text="${news.description}" class="news-description"></p>-->
+    <!-- Контент новости -->
+    <div th:utext="${times.get().getContent()}" class="news-content"></div>
+    <!-- Кнопка назад -->
+    <a href="#" onclick="history.go(-1);" class="back-button">Back</a>
+</div>
+</body>
+</html>

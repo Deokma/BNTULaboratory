@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Edit</title>
+    <link href="/css/user-edit.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>User Edit</h1>
+    <hr>
+    <h3 th:text="'Editing user ' + ${user.username}"></h3>
+    <form action="/admin/user/edit" method="post" style="flex-direction: row;" >
+        <div class="roles-row" style="flex-direction: row;">
+            <div th:each="role : ${roles}" class="form-group" style="flex-direction: row;" th:if="${role.getAuthority() ne 'User'}">
+                <button type="button" class="role-button" th:id="'roleButton_' + ${role.getRole_id()}"
+                        th:classappend="${user.roles.contains(role)} ? 'selected' : ''"
+                        onclick="toggleRole(this)">
+                    <span th:text="${role.getAuthority()}"></span>
+                </button>
+                <input type="checkbox" th:name="roleIds" th:value="${role.getRole_id()}" class="role-input"
+                       th:id="'role_' + ${role.getRole_id()}"
+                       th:checked="${user.roles.contains(role)}">
+            </div>
+        </div>
+        <input type="hidden" th:value="${user.id}" name="userId">
+        <input type="hidden" th:value="${_csrf.token}" name="_csrf">
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+<script>
+    function toggleRole(button) {
+        button.classList.toggle("selected");
+        var roleId = button.id.substring(11); // Extract role ID from button ID
+        var roleInput = document.getElementById("role_" + roleId);
+        roleInput.checked = !roleInput.checked;
+    }
+</script>
+</body>
+</html>

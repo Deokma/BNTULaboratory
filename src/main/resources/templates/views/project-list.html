@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Optional custom styles for card appearance */
+        .news-card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div style="padding-top: 6rem" class="container">
+    <h1>News List</h1>
+    <div class="row">
+        <!-- Iterate over each news item -->
+        <div class="col-md-4" th:each="project : ${projectList}">
+            <div class="card news-card">
+                <!-- Card body with news title and description -->
+                <div class="card-body">
+                    <img width="300px"
+                         height="165px" th:src="@{/images/{id}(id=${project.getPreviewImageId()})}"></img>
+                    <h5 class="card-title" th:text="${project.title}"></h5>
+                    <p class="card-text" th:text="${project.description}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
