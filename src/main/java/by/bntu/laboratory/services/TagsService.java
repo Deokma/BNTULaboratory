@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TagsService {
@@ -35,5 +36,9 @@ public class TagsService {
             }
         }
         return savedTags;
+    }
+
+    public Optional<Tags> findById(Long tagId) {
+        return tagsRepository.findById(tagId);
     }
 }

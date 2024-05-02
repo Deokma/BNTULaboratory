@@ -12,7 +12,7 @@ public class Tags {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tag_id")
-    private Long tag_id;
+    private Long tagId;
     @Column(name = "name")
     private String name;
     @ManyToMany(mappedBy = "tags")

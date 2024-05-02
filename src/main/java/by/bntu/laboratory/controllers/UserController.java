@@ -1,11 +1,16 @@
 package by.bntu.laboratory.controllers;
 
+import by.bntu.laboratory.models.RegistrationCode;
 import by.bntu.laboratory.models.Role;
 import by.bntu.laboratory.models.User;
+import by.bntu.laboratory.repo.RegistrationCodeRepository;
+import by.bntu.laboratory.repo.RoleRepository;
 import by.bntu.laboratory.repo.UserRepository;
 import by.bntu.laboratory.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author Denis Popolamov
@@ -24,6 +30,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserRepository userRepository;
+    private final RegistrationCodeRepository registrationCodeRepository;
 //    @Autowired
 //    private final AvatarImageRepository avatarRepository;
     // private final AvatarImageService avatarService;
@@ -33,7 +40,7 @@ public class UserController {
      */
     @GetMapping("/registration")
     public String registrationPage() {
-        return "registration";
+        return "authorization/registration";
     }
 
     /**
@@ -41,7 +48,7 @@ public class UserController {
      */
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "authorization/login";
     }
 
     /**
@@ -51,12 +58,25 @@ public class UserController {
      * @param model Model
      */
     @PostMapping("/registration")
-    public String createUser(User user, Model model) {
-        if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "User with Username " + user.getUsername() + " already exist.");
-            return "registration";
+    public String createUser(User user, String registrationCode, Model model) {
+        // Извлекаем код регистрации из формы и ищем его в базе данных
+        RegistrationCode code = registrationCodeRepository.findByCode(registrationCode);
+
+        if (code == null) {
+            // Если код регистрации не найден, возвращаем ошибку
+            model.addAttribute("errorMessage", "Invalid registration code");
+            return "authorization/registration";
         }
-        userService.createUser(user);
+
+        // Устанавливаем роль пользователя на основе роли, связанной с кодом регистрации
+        user.setRoles(Collections.singleton(code.getRole()));
+
+        // Регистрируем пользователя
+        if (!userService.createUser(user)) {
+            model.addAttribute("errorMessage", "User with Email " + user.getEmail() + " already exists.");
+            return "authorization/registration";
+        }
+
         return "redirect:/login";
     }
 
@@ -72,7 +92,15 @@ public class UserController {
         User user = userService.getUserByPrincipal(principal);
         Collection<Role> roles = user.getRoles(); // Получаем роли пользователя
         model.addAttribute("roles", roles); // Добавляем роли в модель с именем "userRoles"
-        return "account";
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(g -> g.getAuthority().equals("Admin"));
+        boolean isWriter = authentication.getAuthorities().stream()
+                .anyMatch(g -> g.getAuthority().equals("Writer"));
+        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isWriter", isWriter);
+        return "users/account";
     }
 
 
@@ -90,7 +118,7 @@ public class UserController {
             return "redirect:/account";
         }
         // model.addAttribute("book_list", user.getBooks_list());
-        return "user-info";
+        return "users/user-info";
     }
 
 //    @PostMapping("/upload_avatar/{user_id}")

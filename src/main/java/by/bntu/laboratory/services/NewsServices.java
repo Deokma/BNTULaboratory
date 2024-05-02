@@ -3,6 +3,7 @@ package by.bntu.laboratory.services;
 import by.bntu.laboratory.models.News;
 import by.bntu.laboratory.models.PublicationImages;
 import by.bntu.laboratory.repo.NewsRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,8 @@ public class NewsServices {
         image.setBytes(file.getBytes());
         return image;
     }
-
+    @Transactional
+public List<News> findNewsByTagId(Long tagId) {return newsRepository.findByTags_TagId(tagId);}
     public List<News> getAll() {
         return newsRepository.findAll();
     }

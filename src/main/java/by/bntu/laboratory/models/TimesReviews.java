@@ -13,13 +13,14 @@ import java.util.Date;
 public class TimesReviews implements Publications {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "times_id")
     private Long times_id;
 
     @Column(name = "title")
     private String title;
-    @Column(name = "description")
-    private String description;
+    /*@Column(name = "description")
+    private String description;*/
 
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
@@ -27,12 +28,11 @@ public class TimesReviews implements Publications {
     @Column(name = "visible")
     private Boolean visible;
 
-    @Lob
-    @Column
-    private byte[] cover;
-
     @Column(name = "date")
     private Date date;
+
+    @Column(name = "link")
+    private String link;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -42,7 +42,13 @@ public class TimesReviews implements Publications {
             inverseJoinColumns = @JoinColumn(
                     name = "tag_id", referencedColumnName = "tag_id"))
     private Collection<Tags> tags; // Adjusted attribute name to avoid confusion
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "times_reviews_id")
-    private PublicationImages image;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PublicationImages cover = new PublicationImages();
+    private Long previewImageId;
+
+    public void addImageToTimes(PublicationImages cove) {
+        cove.setTimesReviews(this);
+        cover = cove;
+    }
 }

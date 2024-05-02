@@ -59,6 +59,10 @@
     margin: 0 0 3rem 3rem;
     padding: 1rem 1rem 1rem 1rem;
 }
+.slide-details a:link{
+    text-decoration: none;
+    color: white;
+}
 
 .carousel-button{
     border-radius: 50%;

@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   postgres:
     image: 'postgres:latest'
@@ -7,3 +9,13 @@ services:
       - 'POSTGRES_USER=administator723'
     ports:
       - '5432:5432'
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - 'PGADMIN_DEFAULT_EMAIL=user@domain.com'
+      - 'PGADMIN_DEFAULT_PASSWORD=admin'
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgres

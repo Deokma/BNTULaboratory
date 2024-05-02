@@ -1,11 +1,7 @@
 package by.bntu.laboratory.controllers;
 
-import by.bntu.laboratory.models.News;
-import by.bntu.laboratory.models.Projects;
-import by.bntu.laboratory.models.Tags;
-import by.bntu.laboratory.repo.NewsRepository;
-import by.bntu.laboratory.repo.ProjectsRepository;
-import by.bntu.laboratory.repo.TagsRepository;
+import by.bntu.laboratory.models.*;
+import by.bntu.laboratory.repo.*;
 import by.bntu.laboratory.services.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -33,10 +29,12 @@ public class PublicationsController {
     private final TimesServices timesServices;
     private final EventsServices eventsServices;
     private final ProjectsServices projectsServices;
+    private final EventsRepository eventsRepository;
+    private final TimesRepository timesRepository;
 
     public PublicationsController(NewsRepository newsRepository, TagsRepository tagsRepository, ProjectsRepository projectsRepository,
                                   TagsService tagsService, NewsServices newsServices,
-                                  TimesServices timesServices, EventsServices eventsServices, ProjectsServices projectsServices) {
+                                  TimesServices timesServices, EventsServices eventsServices, ProjectsServices projectsServices, EventsRepository eventsRepository, TimesRepository timesRepository) {
         this.newsRepository = newsRepository;
         this.tagsRepository = tagsRepository;
         this.projectsRepository = projectsRepository;
@@ -45,8 +43,14 @@ public class PublicationsController {
         this.timesServices = timesServices;
         this.eventsServices = eventsServices;
         this.projectsServices = projectsServices;
+        this.eventsRepository = eventsRepository;
+        this.timesRepository = timesRepository;
     }
-
+    @PreAuthorize("hasAuthority('Writer')")
+    @GetMapping("/writer")
+    public String writerPage() {
+        return "users/writer/writer";
+    }
     /**
      * Go to Add News Page
      */
@@ -54,7 +58,15 @@ public class PublicationsController {
     @GetMapping("/news/add")
     public String newsAdd(Model model) {
         model.addAttribute("news", new News());
-        return "news-add";
+        model.addAttribute("tags", tagsRepository.findAll());
+
+        return "users/writer/news-add";
+    }
+    @GetMapping("/news")
+    public String news(Model model) {
+        List<News> newsList = newsRepository.findAll();
+        model.addAttribute("newsList", newsList);
+        return "views/news-list";
     }
     /**
      * Go to News Page
@@ -68,7 +80,7 @@ public class PublicationsController {
             return "error-page"; // Вернуть страницу с ошибкой или перенаправить на другую страницу
         }
         model.addAttribute("news", news);
-        return "news-view"; // Предполагается, что у вас есть шаблон для отображения одной новости
+        return "views/news-view"; // Предполагается, что у вас есть шаблон для отображения одной новости
     }
 
     /**
@@ -123,14 +135,113 @@ public class PublicationsController {
     }
 
     /**
+     * Go to Add Event Page
+     */
+    @PreAuthorize("hasAuthority('Writer')")
+    @GetMapping("/event/add")
+    public String eventAdd(Model model) {
+        model.addAttribute("event", new EventsCalendar());
+        model.addAttribute("tags", tagsRepository.findAll());
+        return "users/writer/event-add";
+    }
+    @GetMapping("/events")
+    public String events(Model model) {
+        List<EventsCalendar> eventsCalendars = eventsRepository.findAll();
+        model.addAttribute("eventCalendarList", eventsCalendars);
+        return "views/event-list";
+    }
+    /**
+     * Go to Events Page
+     */
+    @GetMapping("/event/{eventId}")
+    public String viewEventByTitle(@PathVariable("eventId") Long eventId, Model model) {
+        // Здесь нужно написать код для получения новости по её названию из базы данных
+        Optional<EventsCalendar> events = eventsServices.findById(eventId); // Предполагается, что у вас есть сервис для работы с новостями
+        if (events.isEmpty()) {
+            // Обработка случая, если новость не найдена
+            return "error-page"; // Вернуть страницу с ошибкой или перенаправить на другую страницу
+        }
+        model.addAttribute("events", events);
+        return "views/event-view"; // Предполагается, что у вас есть шаблон для отображения одной новости
+    }
+    /**
+     * Method for adding event
+     *
+     * @param title   Title of the event
+     * @param content Content of the event
+     * @param cover   Cover image for the event
+     * @param tags    Tags for the event
+     */
+    @PreAuthorize("hasAuthority('Writer')")
+    @PostMapping(value = "/event/add", consumes = MULTIPART_FORM_DATA_VALUE)
+    public String addEvent(@RequestParam String title,
+                             @RequestParam String content,
+                             @RequestParam("cover") MultipartFile cover,
+                             @RequestParam(value = "tags", required = false) String tags,
+                             Model model) {
+        try {
+            // Validate file type for cover image
+            if (!cover.getOriginalFilename().matches(".*\\.(png|jpg|jpeg)$")) {
+                throw new Exception("Invalid file type for cover image. Only PNG, JPG, and JPEG files are allowed.");
+            }
+            List<Tags> savedTags = null;
+            if (tags != null && !tags.isEmpty()) {
+                savedTags = tagsService.parseAndSaveTags(tags);
+            }
+
+            // Save the news article to the database
+            EventsCalendar eventsCalendar = new EventsCalendar();
+            eventsCalendar.setTitle(title);
+            eventsCalendar.setContent(content);
+            eventsCalendar.setTags(savedTags);
+            eventsCalendar.setVisible(true);
+            eventsCalendar.setDate(new Date());
+            eventsServices.saveEvent(eventsCalendar, cover);
+            //  news.setCover(cover.getBytes());
+
+
+            eventsRepository.save(eventsCalendar);
+
+            model.addAttribute("message", "News added successfully!");
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to add news: " + e.getMessage());
+        }
+
+        // Redirect to the home page or any other appropriate page
+        return "redirect:/";
+    }
+
+    /**
      * Go to Add News Page
      */
     @PreAuthorize("hasAuthority('Writer')")
     @GetMapping("/project/add")
-    public String projectAdd() {
-        return "project-add";
-    }
+    public String projectAdd(Model model) {
+        model.addAttribute("projects", new Projects());
+        model.addAttribute("tags", tagsRepository.findAll());
 
+        return "users/writer/project-add";
+    }
+    @GetMapping("/projects")
+    public String project(Model model) {
+        List<Projects> projects = projectsRepository.findAll();
+        model.addAttribute("projectsList", projects);
+        return "views/project-list";
+    }
+    /**
+     * Go to News Page
+     */
+    @GetMapping("/project/{projectId}")
+    public String viewProjectByTitle(@PathVariable("projectId") Long projectId, Model model) {
+        // Здесь нужно написать код для получения новости по её названию из базы данных
+        Optional<Projects> projects = projectsServices.findById(projectId); // Предполагается, что у вас есть сервис для работы с новостями
+        if (projects.isEmpty()) {
+            // Обработка случая, если новость не найдена
+            return "error-page"; // Вернуть страницу с ошибкой или перенаправить на другую страницу
+        }
+        model.addAttribute("project", projects);
+        return "views/project-view"; // Предполагается, что у вас есть шаблон для отображения одной новости
+    }
     /**
      * Method for adding project
      *
@@ -162,6 +273,7 @@ public class PublicationsController {
             // Save the news article to the database
             Projects projects = new Projects();
             projects.setTitle(title);
+            projects.setContent(content);
             projects.setTags(savedTags);
             projects.setVisible(true);
             projectsServices.saveProjects(projects, cover);
@@ -178,4 +290,84 @@ public class PublicationsController {
         // Redirect to the home page or any other appropriate page
         return "redirect:/";
     }
+
+    /**
+     * Go to Add Event Page
+     */
+    @PreAuthorize("hasAuthority('Writer')")
+    @GetMapping("/times/add")
+    public String timesAdd(Model model) {
+        model.addAttribute("times", new TimesReviews());
+        model.addAttribute("tags", tagsRepository.findAll());
+        return "users/writer/times-add";
+    }
+    @GetMapping("/times")
+    public String times(Model model) {
+        List<TimesReviews> timesReviews = timesRepository.findAll();
+        model.addAttribute("timesList", timesReviews);
+        return "views/times-list";
+    }
+    /**
+     * Go to Events Page
+     */
+    @GetMapping("/times/{timesId}")
+    public String viewTimesByTitle(@PathVariable("timesId") Long timesId, Model model) {
+        // Здесь нужно написать код для получения новости по её названию из базы данных
+        Optional<TimesReviews> timesReviews = timesServices.findById(timesId); // Предполагается, что у вас есть сервис для работы с новостями
+        if (timesReviews.isEmpty()) {
+            // Обработка случая, если новость не найдена
+            return "error"; // Вернуть страницу с ошибкой или перенаправить на другую страницу
+        }
+        model.addAttribute("times", timesReviews);
+        return "views/times-view"; // Предполагается, что у вас есть шаблон для отображения одной новости
+    }
+    /**
+     * Method for adding event
+     *
+     * @param title   Title of the event
+     * @param content Content of the event
+     * @param cover   Cover image for the event
+     * @param tags    Tags for the event
+     */
+    @PreAuthorize("hasAuthority('Writer')")
+    @PostMapping(value = "/times/add", consumes = MULTIPART_FORM_DATA_VALUE)
+    public String addTimes(@RequestParam String title,
+                           @RequestParam String content,
+                           @RequestParam("cover") MultipartFile cover,
+                           @RequestParam("link") String link,
+                           @RequestParam(value = "tags", required = false) String tags,
+                           Model model) {
+        try {
+            // Validate file type for cover image
+            if (!cover.getOriginalFilename().matches(".*\\.(png|jpg|jpeg)$")) {
+                throw new Exception("Invalid file type for cover image. Only PNG, JPG, and JPEG files are allowed.");
+            }
+            List<Tags> savedTags = null;
+            if (tags != null && !tags.isEmpty()) {
+                savedTags = tagsService.parseAndSaveTags(tags);
+            }
+
+            // Save the news article to the database
+            TimesReviews timesReviews = new TimesReviews();
+            timesReviews.setTitle(title);
+            timesReviews.setContent(content);
+            timesReviews.setTags(savedTags);
+            timesReviews.setVisible(true);
+            timesReviews.setDate(new Date());
+            timesReviews.setLink(link);
+            timesServices.saveTimes(timesReviews, cover);
+            //  news.setCover(cover.getBytes());
+
+
+            timesRepository.save(timesReviews);
+
+            model.addAttribute("message", "News added successfully!");
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to add news: " + e.getMessage());
+        }
+
+        // Redirect to the home page or any other appropriate page
+        return "redirect:/";
+    }
+
 }

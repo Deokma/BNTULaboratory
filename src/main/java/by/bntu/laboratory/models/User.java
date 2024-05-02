@@ -2,6 +2,7 @@ package by.bntu.laboratory.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -26,12 +27,11 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
-    @Setter
-    @Getter
-    @Column(name = "username", unique = true)
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    private String username;
+
+    @Column(name = "email", unique = true)
+    @NotEmpty(message = "Email should not be empty")
+    @Email(message = "Invalid email format")
+    private String email;
     @Column(name = "active")
     private boolean active;
     @Column(name = "password")
@@ -67,18 +67,15 @@ public class User implements UserDetails{
     //@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     //private AvatarImage avatarImage;
 
-    public User(String username, String password, Set<Role> roles) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-    }
+
 
 //    public boolean isAdmin() {
 //        return roles.contains(Role.ADMIN);
 //    }
 
-    public User() {
-
+    @Override
+    public String getUsername() {
+        return this.email; // Используйте поле электронной почты как имя пользователя
     }
 
     @Override

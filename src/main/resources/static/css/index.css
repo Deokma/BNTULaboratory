@@ -1,14 +1,24 @@
-body{
+body {
     margin: 0 auto;
     background-color: #f4eff5;
     font-family: "Roboto";
 }
+
 .tag-container {
     display: flex;
     flex-wrap: wrap;
     align-content: start;
     margin-right: 5px; /* Добавляем небольшое пространство между тегами */
 }
+.tag-container a:link{
+text-decoration: none;
+    color: white;
+}
+.tag-container a:visited{
+    text-decoration: none;
+    color: white;
+}
+
 
 .tag {
     display: flex;
@@ -20,16 +30,22 @@ body{
 }
 
 @keyframes fadeIn {
-    0% {opacity: 0;
-    transform: translateY(5%)}
-    100% {opacity: 1;
-    transform: translateY(0)}
+    0% {
+        opacity: 0;
+        transform: translateY(5%)
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
 }
-.main-wrapper{
+
+.main-wrapper {
     margin: auto;
     background-color: #f4eff5;
 
 }
+
 .main-wrapper h1 {
     text-align: center;
     padding-top: 10rem;
@@ -38,7 +54,8 @@ body{
     line-height: 1.2;
     font-family: "Roboto Slab";
 }
-.container-large p{
+
+.container-large p {
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 0;
@@ -48,16 +65,19 @@ body{
     padding-right: 10%;
     font-family: "Roboto";
 }
+
 .padding-global {
     padding-left: 20%;
     padding-right: 20%;
 }
+
 .container-large {
     margin-right: auto !important;
     margin-left: auto !important;
     animation: fadeIn .5s ease-in-out;
     animation-delay: 1s;
 }
+
 .hero_layout.cc-hero-inner {
     grid-column-gap: 5rem;
     grid-row-gap: 5rem;
@@ -65,11 +85,13 @@ body{
     align-items: center;
     position: relative;
 }
+
 .max-width-large {
     width: 100%;
     max-width: 48rem;
 }
-.card{
+
+.card {
     display: flex;
     /* width: 1000px; */
     min-width: 80%;
@@ -85,6 +107,7 @@ body{
     padding-top: calc(var(--index) * var(--card-top-offset));
 
 }
+
 :root {
     --card-height: 40vw;
     --card-margin: 4vw;
@@ -92,12 +115,13 @@ body{
     --outline-width: 0px;
 }
 
-.cards{
+.cards {
     margin-top: 5rem;
     margin-bottom: 1rem;
     animation: fadeIn 1s ease-in-out;
     animation-delay: 1s;
 }
+
 #cards {
     /* Make place at bottom, as items will slide to that position*/
     padding-bottom: calc(var(--numcards) * var(--card-top-offset));
@@ -105,7 +129,7 @@ body{
     margin-bottom: var(--card-margin);
 }
 
-.card-image{
+.card-image {
     max-width: 50%;
     min-width: 40%;
     max-height: 50%;
@@ -117,7 +141,8 @@ body{
     float: left;
     position: relative;
 }
-.card-content{
+
+.card-content {
     position: relative;
     float: left;
     margin-left: 0;
@@ -129,28 +154,34 @@ body{
     transform-origin: 50% 0%;
     will-change: transform;
 }
+
 #debug {
     position: fixed;
     top: 1em;
     left: 1em;
 }
+
 #debug::after {
     content: " Show Debug";
     margin-left: 1.5em;
     color: white;
     white-space: nowrap;
 }
-.card-title h2{
+
+.card-title h2 {
     font-family: "Roboto Slab";
 }
-.card-title p{
+
+.card-title p {
     font-size: 12px;
     font-family: "Roboto";
 }
-.card-links hr{
+
+.card-links hr {
     border-top: 1px solid black;
 }
-.card-links a{
+
+.card-links a {
     vertical-align: top;
     color: black;
     font-size: 14px;
@@ -162,12 +193,14 @@ body{
     display: inline-block;
     position: relative;
 }
-.card-links a:hover{
+
+.card-links a:hover {
     color: #008054;
 
     text-decoration: underline;
 }
-.card-page{
+
+.card-page {
     margin-right: 3%;
     right: 3%;
     margin-top: .25rem;
@@ -175,32 +208,39 @@ body{
     font-family: "Roboto Slab";
 }
 
-.news{
+.news {
     background-color: #008054;
     display: flex;
 }
-.news h1{
+.news a:link{
+    text-decoration: none;
+}
+.news h1 {
     font-family: "Roboto Slab";
     font-weight: bold;
     color: white;
 }
-.news h2{
+
+.news h2 {
     font-family: "Roboto Slab";
     font-weight: bold;
 }
-.news h3{
+
+.news h3 {
     font-family: "Roboto Slab";
     font-weight: bold;
 }
-.news p{
+
+.news p {
     font-family: "Roboto";
 
     border-radius: 25px;
 }
-.news a{
+
+.news a {
     background-color: white;
     color: black;
-    font-variation-settings: "wght"600;
+    font-variation-settings: "wght" 600;
     border-radius: 25px;
     align-items: center;
     padding: 2% 2%;
@@ -210,12 +250,15 @@ body{
     transition: background-color .2s;
     display: flex;
 }
-.news a:hover{
+
+.news a:hover {
     color: #6c68ad;
 }
-.news-card p{
+
+.news-card p {
     font-family: "Roboto";
 }
+
 /*.news-card{*/
 /*    border-radius: 25px;*/
 /*    background-color: white;*/
@@ -227,14 +270,16 @@ body{
 /*    animation-delay: .5s;*/
 /*}*/
 
-.news-card-image img{
+.news-card-image img {
     border-radius: 25px;
     margin-top: 2rem;
     margin-left: 1rem;
 }
-.news-card-details{
+
+.news-card-details {
     margin: 1rem 3rem 1rem 1rem;
 }
+
 .news-link {
     display: block; /* Делаем ссылку блочным элементом */
     border-radius: 25px; /* Закругляем углы, чтобы соответствовать стилю .news-card */
@@ -251,33 +296,47 @@ body{
     margin-top: 1rem; /* Отступ сверху, если это необходимо */
 }
 
-.data-bases h1{
+.data-bases h1 {
     font-family: "Roboto Slab";
     margin-right: 20%;
 }
-.db-top{
+
+.db-top {
     display: flex;
 }
-.db-top button{
+
+.db-top a {
     background-color: #008054;
     color: white;
-    font-variation-settings: "wght"600;
+    font-variation-settings: "wght" 600;
     border-radius: 50px;
     align-items: center;
 
     font-family: "Roboto";
-    padding: 2% 2rem;
+    padding: 3% 4rem;
     font-size: 16px;
     transition: background-color .3s;
     display: flex;
+    text-decoration: none;
 }
-.db-top a:hover{
+.db-top a:link{
+    text-decoration: none;
+    color: white;
+}
+.db-top a:visited{
+    text-decoration: none;
+    color: white;
+}
+
+.db-top a:hover {
     background-color: #006642;
 }
-.db-cards{
+
+.db-cards {
     display: flex;
     margin-top: 5%;
 }
+
 .db-card {
     max-width: 20rem;
     background-color: white;
@@ -297,58 +356,69 @@ body{
     font-family: "Roboto";
     font-weight: bold;
 }
+
 .db-card a:hover {
     color: #006642;
 }
 
-.db-card h2{
+.db-card h2 {
     font-family: "Roboto Slab";
     margin-left: 1rem;
     margin-right: 1rem;
 }
-.db-card p{
+
+.db-card p {
     font-family: "Roboto";
     margin-left: 1rem;
     margin-right: 1rem;
 }
-.projects{
+
+.projects {
     background-color: #008054;
     border-radius: 32px;
 }
-.projects-top{
+
+.projects-top {
     display: flex;
     margin-top: 5%;
     margin-left: 5%;
 }
-.projects-top h1{
+
+.projects-top h1 {
     color: white;
     font-family: "Roboto Slab", serif;
 }
-.projects-top a{
+
+.projects-top a {
     background-color: white;
     color: black;
-    font-variation-settings: "wght"600;
+    font-variation-settings: "wght" 600;
     border-radius: 50px;
     align-items: center;
-    padding: 3% 2%;
+    padding: 3% 3%;
     font-family: "Roboto", serif;
 
     max-width: 14rem;
     transition: background-color .3s;
     display: flex;
+    text-decoration: none;
 }
-.projects-top a:hover{
+
+.projects-top a:hover {
     background-color: #006642;
     color: white;
     align-items: center;
 }
-.projects-top p{
+
+.projects-top p {
     color: white;
 }
-.online-services{
+
+.online-services {
     background-color: white;
 }
-.onl-serv-card{
+
+.onl-serv-card {
     width: 200px;
     height: 200px;
     border-radius: 20px;
@@ -360,33 +430,52 @@ body{
     text-decoration: none;
     transition: all .3s;
 }
-.onl-serv-card:hover{
+
+.onl-serv-card:hover {
     background-color: #008054;
     color: white;
     fill: #ffffff;
 }
-.onl-serv-card-center{
+
+.onl-serv-card-center {
     margin: 2rem 1rem 1rem 1rem;
     text-align: center;
     display: block;
 }
 
-.events-calendar{
+.events-calendar {
     display: block;
     flex-direction: column;
 }
-.ec-top{
+.events-calendar a:link{
+    text-decoration: none;
+    color:black;
+}
+.events-calendar a:visited{
+    text-decoration: none;
+    color: black;
+}
+.ec-top {
     display: flex;
     font-family: "Roboto";
 }
-.ec-top h1{
+.ec-top a:link{
+    text-decoration: none;
+    color: #ffffff;
+}
+.ec-top a:visited{
+    text-decoration: none;
+    color: #ffffff;
+}
+.ec-top h1 {
     font-size: 38px;
     font-family: "Roboto Slab";
 }
-.ec-top a{
+
+.ec-top a {
     background-color: #008054;
     color: white;
-    font-variation-settings: "wght"600;
+    font-variation-settings: "wght" 600;
     border-radius: 50px;
     align-items: center;
     padding: 3% 2%;
@@ -396,14 +485,18 @@ body{
     transition: background-color .3s;
     display: flex;
 }
-.ec-top a:hover{
+
+.ec-top a:hover {
     background-color: #006642;
 }
-.ec-cards{
+
+.ec-cards {
     display: flex;
     justify-content: center;
+    flex-direction: row;
 }
-.ec-card{
+
+.ec-card {
     display: flex;
     flex-direction: column;
     border: solid #f4eff5;
@@ -411,27 +504,39 @@ body{
     margin: .25rem .25rem .25rem .25rem;
     transition: .2s border;
 }
+.ec-card a {
+    font-weight: normal;
+    text-decoration: none;
+    color: black;
+}
+
 .ec-card:hover {
     border: solid #008054;
     transition: .2s border;
 }
-.ec-card h2{
-    padding: 0 1rem 0 1rem;
-}
-.ec-card p{
+
+.ec-card h2 {
     padding: 0 1rem 0 1rem;
 }
 
-.ec-card img{
+.ec-card p {
+    padding: 0 1rem 0 1rem;
+}
+
+.ec-card img {
     margin: .25rem 1rem .25rem 1rem;
     border-radius: 1rem;
     border: solid white;
+    width: 356px;
+    height: 200px;
 }
-.tg{
+
+.tg {
     background-color: white;
     padding: 5% 0 5% 0;
 }
-.tg-block{
+
+.tg-block {
     flex-direction: column;
     text-align: center;
     margin: 10% 10% 10% 10%;
@@ -443,13 +548,15 @@ body{
     justify-content: space-between;
     align-items: center;
 }
-.tg-block h1{
+
+.tg-block h1 {
     font-family: "Roboto Slab";
 }
-.tg-block a{
+
+.tg-block a {
     background-color: #008054;
     color: white;
-    font-variation-settings: "wght"600;
+    font-variation-settings: "wght" 600;
     border-radius: 2rem;
     font-family: "Roboto", serif;
     justify-content: center;
@@ -460,17 +567,20 @@ body{
     transition: background-color .3s;
     text-decoration: none;
 }
-.tg-block svg{
+
+.tg-block svg {
     display: inline-block;
     margin: -7px 2px;
 }
-.footer{
+
+.footer {
     background-color: #008054;
     border: solid #008054;
     border-radius: 1rem 1rem 0 0;
     padding: 0 0 5%;
 }
-.footer-content{
+
+.footer-content {
     font-size: 28px;
     color: white;
     /*margin: 10% 34% 0;*/
@@ -479,13 +589,15 @@ body{
     justify-content: center;
     display: flex;
 }
-.footer-links{
+
+.footer-links {
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.footer-link{
+
+.footer-link {
     margin: .25rem .25rem .25rem .25rem;
     display: flex;
     align-items: center;
@@ -495,6 +607,7 @@ body{
     border-radius: .5rem;
     border: solid #cccccc;
 }
+
 .footer-link svg {
     display: block;
     margin: auto;

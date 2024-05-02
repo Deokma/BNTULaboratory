@@ -3,6 +3,7 @@ package by.bntu.laboratory.services;
 import by.bntu.laboratory.models.Projects;
 import by.bntu.laboratory.models.PublicationImages;
 import by.bntu.laboratory.repo.ProjectsRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,8 @@ public class ProjectsServices {
     public void deleteProjets(Long id) {
         projectsRepository.deleteById(id);
     }
-
+    @Transactional
+    public List<Projects> findProjectsByTagId(Long tagId) {
+        return projectsRepository.findProjectsByTags_TagId(tagId);
+    }
 }

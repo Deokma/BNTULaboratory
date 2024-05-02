@@ -33,7 +33,7 @@ label {
 }
 
 input[type="text"],
-input[type="username"],
+input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
@@ -43,9 +43,7 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    width: 50%; /* Ширина кнопки */
-    margin: 0 auto; /* Центрирование кнопки */
-    display: block; /* Делаем кнопку блочным элементом */
+    width: 100%; /* Ширина кнопки */
     padding: 10px;
     background-color: #006642; /* Darker BNTU Green */
     color: #fff;
@@ -58,5 +56,3 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #025638; /* Darkest BNTU Green */
 }
-
-

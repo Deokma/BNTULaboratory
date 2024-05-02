@@ -27,8 +27,8 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final RoleService roleService;
     public boolean createUser(User user) {
-        String name = user.getUsername();
-        if (userRepository.findByUsername(name) != null) return false;
+        String email = user.getEmail();
+        if (userRepository.findByEmail(email) != null) return false;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
 
@@ -72,7 +72,7 @@ public class UserService {
 
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
-        return userRepository.findByUsername(principal.getName());
+        return userRepository.findByEmail(principal.getName());
     }
 
     public void changeUserRoles(User user, Set<Role> roles) {
@@ -96,6 +96,6 @@ public class UserService {
         // для поиска соответствующего объекта User в базе данных
         // и вернуть его из метода
         // например, используя UserRepository
-        return userRepository.findByUsername(username);
+        return userRepository.findByEmail(username);
     }
 }
