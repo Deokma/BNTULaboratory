@@ -1,6 +1,7 @@
 package by.bntu.laboratory.models;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Data;
 
 import java.util.*;
@@ -27,6 +28,7 @@ public class News implements Publications {
     @Column(name = "visible")
     private Boolean visible;
 
+
    /* @Lob
     @Column
     private byte[] cover;*/
@@ -51,4 +53,9 @@ public class News implements Publications {
         cove.setNews(this);
         cover = cove;
     }
+    @Transactional
+    public Collection<Tags> getTags() {
+        return tags;
+    }
+
 }

@@ -15,7 +15,7 @@ public class EventsCalendar implements Publications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
-    private Long event_id;
+    private Long eventId;
 
     @Column(name = "title")
     private String title;
@@ -38,7 +38,7 @@ public class EventsCalendar implements Publications {
                     name = "tag_id", referencedColumnName = "tag_id"))
     private Collection<Tags> tags;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "eventsCalendar")
     private PublicationImages cover = new PublicationImages();
     private Long previewImageId;
 

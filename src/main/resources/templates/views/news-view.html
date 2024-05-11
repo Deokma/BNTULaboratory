@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Details</title>
+    <title th:text="${news.title}"></title>
     <link rel="stylesheet" href="/css/view.css">
 </head>
 <body>
@@ -12,14 +12,17 @@
     <div class="news-content-container">
         <!-- News Content -->
         <div class="news-content">
-            <h1 th:text="${news.get().getTitle()}" class="news-title"></h1>
-            <p th:text="${#dates.format(news.get().getDate(), 'dd.MM.yyyy')}" class="news-date"></p>
-            <!-- Display Tags -->
+            <h1 th:text="${news.title}" class="news-title"></h1>
+            <p th:text="${#dates.format(news.getDate(), 'dd.MM.yyyy')}" class="news-date"></p>
+            <div th:if="${usersession.hasRole('Writer')}">
+            <a class="news-content-edit" th:href="@{/news/edit/{id}(id=${news.getNewsId()})}">Редактировать</a>
+            </div>
+                <!-- Display Tags -->
             <div class="news-tags">
                 Tags:
-                <a th:href="@{/tag/{tagId}/news(tagId=${tag.getTagId()})}" th:each="tag : ${news.get().getTags()}" class="tag">#<span th:text="${tag.name}"></span></a>
+                <a th:href="@{/tag/{tagId}/news(tagId=${tag.getTagId()})}" th:each="tag : ${news.getTags()}" class="tag">#<span th:text="${tag.name}"></span></a>
             </div>
-            <div th:utext="${news.get().getContent()}" class="news-text"></div>
+            <div th:utext="${news.getContent()}" class="news-text"></div>
             <a href="#" onclick="history.go(-1);" class="back-button">Back</a>
         </div>
     </div>

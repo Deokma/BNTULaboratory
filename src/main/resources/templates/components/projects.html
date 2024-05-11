@@ -1,19 +1,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="projects" th:fragment="projects">
-    <div style="padding: 2rem 5% 0 5% ;">
+    <div class="projects-padding">
         <div class="projects-top">
             <h1>Проекты</h1>
-            <div style="right: 20%; position: absolute;margin-top: 1rem"><p>Текст какой-нибудь очень интересный <br>
+            <div class="projects-top-text"><p>Текст какой-нибудь очень интересный <br>
                 будет супер пупер
                 классно, если в две строчки даже его </p>
                 <a th:href="@{/projects}">Смотреть все проекты</a>
             </div>
         </div>
     </div>
-    <div style="margin-top: 3rem; padding-left: 3rem">
+    <div class="carousel-content">
         <div class="carousel-container">
             <div class="carousel">
-                <div th:each="project : ${projectsList}" class="slide"
+                <div th:each="project : ${projectsList}" th:if="${project.visible}" class="slide"
                      th:style="'background-image: url(' + @{/images/{id}(id=${project.getPreviewImageId()})} + ');'">
                     <div class="slide-details">
                         <div class="tag-container">

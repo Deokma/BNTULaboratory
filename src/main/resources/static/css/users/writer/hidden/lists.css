@@ -1,0 +1,110 @@
+.row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: .8rem;
+}
+.row-project {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: .8rem;
+}
+.row-project a:link {
+    text-decoration: none;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 6rem;
+}
+
+.cards {
+    display: inline-grid;
+    /*grid-template-columns: repeat(4, 1fr); !* 4 карточки в линии *!*/
+    grid-gap: 1rem;
+    justify-content: center;
+}
+
+.card {
+    border: solid;
+    border-radius: 1rem;
+    margin: .25rem;
+    overflow: hidden;
+
+}
+
+.card-content {
+    padding: 1rem;
+}
+.card-publ {
+    display: flex;
+    /* width: 1000px; */
+    min-width: 80%;
+    margin-top: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 25px;
+    border-style: solid;
+    background-color: white;
+    position: relative;
+    top: 7rem;
+    right: 1rem;
+    padding-top: calc(var(--index) * var(--card-top-offset));
+    z-index: 1;
+}
+.card-image {
+    border-radius: 25px;
+    width: calc(100% - 1.7rem); /* Ширина изображения с учетом отступов */
+    height: calc(60% - 2rem); /* Высота изображения подстраивается автоматически */
+    object-fit: cover; /* Обрезка изображения для заполнения контейнера без искажения пропорций */
+    margin: 0.85rem;
+}
+.card-data{
+    font-size: .85rem;
+    margin: 0 0 0 .25rem;
+    color: black;
+    font-family: "Roboto Slab";
+    align-items: center;
+    text-decoration: none;
+}
+.card-title {
+    font-size: 1.25rem;
+    margin: 0.5rem .25rem 0 .25rem;
+    font-weight: bold;
+    color: black;
+    font-family: "Roboto Slab";
+    align-items: center;
+    text-decoration: none;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin: 0 .25rem 0.5rem .25rem;
+    text-decoration: none;
+    color: black;
+    font-family: "Roboto";
+    align-items: center;
+}
+
+.hidden {
+    background-color: #ffd8d8;
+    z-index: 2;
+    position: relative;
+}
+.hidden-page {
+    background-color: #ffb4b4;
+}
+.centered-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.db-link{
+    margin: 0 0 .5rem .5rem;
+    color:  #008054;
+    font-family: "Roboto";
+}
+.db-link:link{
+    text-decoration: none;
+}

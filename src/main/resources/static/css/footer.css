@@ -1,0 +1,40 @@
+
+.footer {
+    background-color: #008054;
+    border: solid #008054;
+    border-radius: 1rem 1rem 0 0;
+    padding: 0 0 5%;
+}
+
+.footer-content {
+    font-size: 28px;
+    color: white;
+    /*margin: 10% 34% 0;*/
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.footer-link {
+    margin: .25rem .25rem .25rem .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: .5rem;
+    border: solid #cccccc;
+}
+
+.footer-link svg {
+    display: block;
+    margin: auto;
+}

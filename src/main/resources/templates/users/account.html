@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Account</title>
+    <title>Аккаунт</title>
     <!-- Подключение стилей Bootstrap для красивого дизайна -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -26,6 +26,12 @@
         <div class="col-md-8">
             <!-- Имя пользователя -->
             <h2 th:text="${usersession.username}" class="mb-3"></h2>
+            <form class="d-flex " action="/logout" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                <input type="submit"
+                       class="btn btn-online-primary btn-sm btn-light float-right px-3"
+                       value="Выйти">
+            </form>
             <!-- Роли пользователя -->
             <!--<h4>Roles:</h4>
             <p>

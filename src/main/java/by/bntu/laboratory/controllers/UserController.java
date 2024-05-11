@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 
 /**
  * @author Denis Popolamov
@@ -64,16 +65,16 @@ public class UserController {
 
         if (code == null) {
             // Если код регистрации не найден, возвращаем ошибку
-            model.addAttribute("errorMessage", "Invalid registration code");
+            model.addAttribute("errorMessage", "Неправильный регистрационный код");
             return "authorization/registration";
         }
 
         // Устанавливаем роль пользователя на основе роли, связанной с кодом регистрации
-        user.setRoles(Collections.singleton(code.getRole()));
-
+       // user.setRoles(Collections.singleton(code.getRole()));
+        //userService.changeUserRoles(user, new HashSet<>(Collections.singleton(code.getRole())));
         // Регистрируем пользователя
-        if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "User with Email " + user.getEmail() + " already exists.");
+        if (!userService.createUser(user,code)) {
+            model.addAttribute("errorMessage", "Пользователь с Email " + user.getEmail() + " Уже существует.");
             return "authorization/registration";
         }
 
@@ -86,7 +87,7 @@ public class UserController {
      * @param model     Model
      * @param principal The user who logged in
      */
-    @PreAuthorize("hasAuthority('User')")
+    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Writer')")
     @GetMapping("/account")
     public String accountPage(Model model, Principal principal) {
         User user = userService.getUserByPrincipal(principal);
@@ -104,22 +105,7 @@ public class UserController {
     }
 
 
-    /**
-     * Go to another user page
-     *
-     * @param user      User
-     * @param model     Model
-     * @param principal The user who logged in
-     */
-    @GetMapping("/user/{user}")
-    public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
-        User user_principal = userService.getUserByPrincipal(principal);
-        if (user_principal == user) {
-            return "redirect:/account";
-        }
-        // model.addAttribute("book_list", user.getBooks_list());
-        return "users/user-info";
-    }
+
 
 //    @PostMapping("/upload_avatar/{user_id}")
 //    public String uploadImage(@PathVariable("user_id") Long user_id, @RequestParam("avatar") MultipartFile avatar, Model model) {

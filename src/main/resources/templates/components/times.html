@@ -3,13 +3,13 @@
     <div style="padding: 4rem 10% 0 10% ;">
         <div class="ec-top">
             <h1>Обзоры на Times</h1>
-            <div style="margin-top: 1rem; margin-left: 10rem;">
+            <div class="ec-top-text">
                 <p>Текст какой-нибудь очень интересный будет супер пупер классно, если в две строчки даже его </p>
                 <a th:href="@{/times}">Смотреть все базы события</a>
             </div>
         </div>
         <div class="ec-cards">
-            <div th:each="times : ${timesList}">
+            <div th:each="times : ${timesList}" th:if="${times.visible}">
                 <!--                <a class="ec-card" th:href="@{/times/{id}(id=${times.getTimes_id()})}">-->
                 <a class="ec-card" th:href="${times.getLink()}">
                     <img th:src="@{/images/{id}(id=${times.getPreviewImageId()})}"

@@ -33,6 +33,8 @@
                    placeholder="Код доступа"/>
         </div>
         <br>
+        <div th:if="${param.error}">Invalid username or password</div>
+        <span th:text="${errorMessage}"></span>
         <a th:href="@{/login}" style="display: block; text-align: center;">Авторизация</a>
         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
         <input type="submit" class="btn btn-flex btn-dark" value="Регистрация">

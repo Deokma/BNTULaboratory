@@ -56,6 +56,7 @@ public class LaboratoryApplication {
         if (userRepository.count() == 0) {
             // Находим роли "Admin" и "User" в базе данных
             Role adminRole = roleRepository.findByName("Admin");
+            Role writerRole = roleRepository.findByName("Writer");
             Role userRole = roleRepository.findByName("User");
 
             // Создаем администратора
@@ -68,6 +69,7 @@ public class LaboratoryApplication {
             // Создаем коллекцию ролей для администратора
             Set<Role> roles = new HashSet<>();
             roles.add(adminRole);
+            roles.add(writerRole);
             roles.add(userRole);
 
             // Устанавливаем роли для администратора

@@ -26,23 +26,21 @@ public class PublicationImages {
     private String contentType;
     @Column(name = "isPreviewImage")
     private boolean isPreviewImage;
-    @Lob
+
     private byte[] bytes;
 
-    //    @ManyToOne
-//    @JoinColumn(name = "publication_id")
-//    private Publications publication;
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "news_id") // Имя столбца в таблице 'images', связывающего с таблицей 'news'
     private News news;
+
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    // @JoinColumn(name = "events_calendar_id")
     private EventsCalendar eventsCalendar;
-    //
+
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    // @JoinColumn(name = "times_reviews_id")
     private TimesReviews timesReviews;
+
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    // @JoinColumn(name = "times_reviews_id")
     private Projects projects;
+
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    private PublicationActivities publicationActivities;
 }

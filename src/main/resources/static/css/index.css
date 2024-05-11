@@ -4,17 +4,104 @@ body {
     font-family: "Roboto";
 }
 
+@media (max-width: 999px) {
+    .card-image {
+        display: none;
+    }
+
+    .cards {
+        width: 85%;
+    }
+
+    .padding-global {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+
+    .main-wrapper h1 {
+        text-align: center;
+        padding-top: 10rem;
+        margin-bottom: 0;
+        font-size: 48px;
+        line-height: 1.2;
+        font-family: "Roboto Slab";
+    }
+
+    .card-page {
+        display: none;
+    }
+
+    .card-title {
+        text-align: center;
+    }
+
+    .card-content {
+        position: relative;
+        float: left;
+        margin-left: 2%;
+        margin-right: 4%;
+        min-width: 90%;
+        max-width: 90%;
+        min-height: 90%;
+        max-height: 90%;
+        transform-origin: 100% 0%;
+        will-change: transform;
+    }
+}
+
+@media (max-width: 820px) {
+    .main-wrapper h1 {
+        text-align: center;
+        padding-top: 10rem;
+        margin-bottom: 0;
+        font-size: 42px;
+        line-height: 1.2;
+        font-family: "Roboto Slab";
+    }
+}
+
+@media (min-width: 1000px) {
+    .padding-global {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+
+    .main-wrapper h1 {
+        text-align: center;
+        padding-top: 10rem;
+        margin-bottom: 0;
+        font-size: 58px;
+        line-height: 1.2;
+        font-family: "Roboto Slab";
+    }
+
+    .card-content {
+        position: relative;
+        float: left;
+        margin-left: 0;
+        margin-right: 5%;
+        min-width: 30%;
+        max-width: 40%;
+        min-height: 30%;
+        max-height: 40%;
+        transform-origin: 50% 0%;
+        will-change: transform;
+    }
+}
+
 .tag-container {
     display: flex;
     flex-wrap: wrap;
     align-content: start;
     margin-right: 5px; /* Добавляем небольшое пространство между тегами */
 }
-.tag-container a:link{
-text-decoration: none;
+
+.tag-container a:link {
+    text-decoration: none;
     color: white;
 }
-.tag-container a:visited{
+
+.tag-container a:visited {
     text-decoration: none;
     color: white;
 }
@@ -46,14 +133,6 @@ text-decoration: none;
 
 }
 
-.main-wrapper h1 {
-    text-align: center;
-    padding-top: 10rem;
-    margin-bottom: 0;
-    font-size: 58px;
-    line-height: 1.2;
-    font-family: "Roboto Slab";
-}
 
 .container-large p {
     text-align: center;
@@ -64,18 +143,6 @@ text-decoration: none;
     padding-left: 10%;
     padding-right: 10%;
     font-family: "Roboto";
-}
-
-.padding-global {
-    padding-left: 20%;
-    padding-right: 20%;
-}
-
-.container-large {
-    margin-right: auto !important;
-    margin-left: auto !important;
-    animation: fadeIn .5s ease-in-out;
-    animation-delay: 1s;
 }
 
 .hero_layout.cc-hero-inner {
@@ -105,7 +172,7 @@ text-decoration: none;
     top: 7rem;
     right: 1rem;
     padding-top: calc(var(--index) * var(--card-top-offset));
-
+    z-index: 1;
 }
 
 :root {
@@ -130,30 +197,13 @@ text-decoration: none;
 }
 
 .card-image {
-    max-width: 50%;
-    min-width: 40%;
-    max-height: 50%;
-    min-height: 40%;
-    margin-top: 2rem;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-    padding-left: 0;
-    float: left;
-    position: relative;
+    border-radius: 25px;
+    width: calc(40% - 1.7rem); /* Ширина изображения с учетом отступов */
+    height: auto;
+    object-fit: contain; /* Обрезка изображения для заполнения контейнера без искажения пропорций */
+    margin: 1.85rem 1.5rem 4rem 1.5rem;
 }
 
-.card-content {
-    position: relative;
-    float: left;
-    margin-left: 0;
-    margin-right: 5%;
-    min-width: 30%;
-    max-width: 40%;
-    min-height: 30%;
-    max-height: 40%;
-    transform-origin: 50% 0%;
-    will-change: transform;
-}
 
 #debug {
     position: fixed;
@@ -206,409 +256,4 @@ text-decoration: none;
     margin-top: .25rem;
     color: #008054;
     font-family: "Roboto Slab";
-}
-
-.news {
-    background-color: #008054;
-    display: flex;
-}
-.news a:link{
-    text-decoration: none;
-}
-.news h1 {
-    font-family: "Roboto Slab";
-    font-weight: bold;
-    color: white;
-}
-
-.news h2 {
-    font-family: "Roboto Slab";
-    font-weight: bold;
-}
-
-.news h3 {
-    font-family: "Roboto Slab";
-    font-weight: bold;
-}
-
-.news p {
-    font-family: "Roboto";
-
-    border-radius: 25px;
-}
-
-.news a {
-    background-color: white;
-    color: black;
-    font-variation-settings: "wght" 600;
-    border-radius: 25px;
-    align-items: center;
-    padding: 2% 2%;
-    font-family: "Roboto";
-    font-weight: bold;
-    font-size: .88rem;
-    transition: background-color .2s;
-    display: flex;
-}
-
-.news a:hover {
-    color: #6c68ad;
-}
-
-.news-card p {
-    font-family: "Roboto";
-}
-
-/*.news-card{*/
-/*    border-radius: 25px;*/
-/*    background-color: white;*/
-/*    display: flex;*/
-/*    margin-top: 1rem;*/
-
-/*    !*margin-right: 20%;*!*/
-/*    animation: fadeIn .5s ease-in-out;*/
-/*    animation-delay: .5s;*/
-/*}*/
-
-.news-card-image img {
-    border-radius: 25px;
-    margin-top: 2rem;
-    margin-left: 1rem;
-}
-
-.news-card-details {
-    margin: 1rem 3rem 1rem 1rem;
-}
-
-.news-link {
-    display: block; /* Делаем ссылку блочным элементом */
-    border-radius: 25px; /* Закругляем углы, чтобы соответствовать стилю .news-card */
-    background-color: white; /* Устанавливаем фоновый цвет */
-    margin-top: 1rem; /* Отступ сверху, если это необходимо */
-    width: 100%; /* Ширина равна 100% от родительского контейнера */
-    height: 100%; /* Высота равна 100% от родительского контейнера */
-}
-
-.news-card {
-    width: 80%; /* Ширина равна 100% от родительского контейнера */
-    border-radius: 25px; /* Закругляем углы */
-    background-color: white; /* Устанавливаем фоновый цвет */
-    margin-top: 1rem; /* Отступ сверху, если это необходимо */
-}
-
-.data-bases h1 {
-    font-family: "Roboto Slab";
-    margin-right: 20%;
-}
-
-.db-top {
-    display: flex;
-}
-
-.db-top a {
-    background-color: #008054;
-    color: white;
-    font-variation-settings: "wght" 600;
-    border-radius: 50px;
-    align-items: center;
-
-    font-family: "Roboto";
-    padding: 3% 4rem;
-    font-size: 16px;
-    transition: background-color .3s;
-    display: flex;
-    text-decoration: none;
-}
-.db-top a:link{
-    text-decoration: none;
-    color: white;
-}
-.db-top a:visited{
-    text-decoration: none;
-    color: white;
-}
-
-.db-top a:hover {
-    background-color: #006642;
-}
-
-.db-cards {
-    display: flex;
-    margin-top: 5%;
-}
-
-.db-card {
-    max-width: 20rem;
-    background-color: white;
-    border-radius: 25px;
-    border-style: solid;
-    margin-left: .5rem;
-    margin-right: .5rem;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem; /* Добавьте это, чтобы создать отступ вокруг содержимого */
-}
-
-.db-card a {
-    margin-top: auto; /* Добавьте это */
-    margin-left: 1rem;
-    color: #008054;
-    font-family: "Roboto";
-    font-weight: bold;
-}
-
-.db-card a:hover {
-    color: #006642;
-}
-
-.db-card h2 {
-    font-family: "Roboto Slab";
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-.db-card p {
-    font-family: "Roboto";
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-.projects {
-    background-color: #008054;
-    border-radius: 32px;
-}
-
-.projects-top {
-    display: flex;
-    margin-top: 5%;
-    margin-left: 5%;
-}
-
-.projects-top h1 {
-    color: white;
-    font-family: "Roboto Slab", serif;
-}
-
-.projects-top a {
-    background-color: white;
-    color: black;
-    font-variation-settings: "wght" 600;
-    border-radius: 50px;
-    align-items: center;
-    padding: 3% 3%;
-    font-family: "Roboto", serif;
-
-    max-width: 14rem;
-    transition: background-color .3s;
-    display: flex;
-    text-decoration: none;
-}
-
-.projects-top a:hover {
-    background-color: #006642;
-    color: white;
-    align-items: center;
-}
-
-.projects-top p {
-    color: white;
-}
-
-.online-services {
-    background-color: white;
-}
-
-.onl-serv-card {
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
-    border: solid #222222;
-    background-color: #f1f1f1;
-    display: inline-grid;
-    margin: .5rem;
-    color: #222222;
-    text-decoration: none;
-    transition: all .3s;
-}
-
-.onl-serv-card:hover {
-    background-color: #008054;
-    color: white;
-    fill: #ffffff;
-}
-
-.onl-serv-card-center {
-    margin: 2rem 1rem 1rem 1rem;
-    text-align: center;
-    display: block;
-}
-
-.events-calendar {
-    display: block;
-    flex-direction: column;
-}
-.events-calendar a:link{
-    text-decoration: none;
-    color:black;
-}
-.events-calendar a:visited{
-    text-decoration: none;
-    color: black;
-}
-.ec-top {
-    display: flex;
-    font-family: "Roboto";
-}
-.ec-top a:link{
-    text-decoration: none;
-    color: #ffffff;
-}
-.ec-top a:visited{
-    text-decoration: none;
-    color: #ffffff;
-}
-.ec-top h1 {
-    font-size: 38px;
-    font-family: "Roboto Slab";
-}
-
-.ec-top a {
-    background-color: #008054;
-    color: white;
-    font-variation-settings: "wght" 600;
-    border-radius: 50px;
-    align-items: center;
-    padding: 3% 2%;
-    font-family: "Roboto";
-
-    max-width: 14rem;
-    transition: background-color .3s;
-    display: flex;
-}
-
-.ec-top a:hover {
-    background-color: #006642;
-}
-
-.ec-cards {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.ec-card {
-    display: flex;
-    flex-direction: column;
-    border: solid #f4eff5;
-    border-radius: 1rem;
-    margin: .25rem .25rem .25rem .25rem;
-    transition: .2s border;
-}
-.ec-card a {
-    font-weight: normal;
-    text-decoration: none;
-    color: black;
-}
-
-.ec-card:hover {
-    border: solid #008054;
-    transition: .2s border;
-}
-
-.ec-card h2 {
-    padding: 0 1rem 0 1rem;
-}
-
-.ec-card p {
-    padding: 0 1rem 0 1rem;
-}
-
-.ec-card img {
-    margin: .25rem 1rem .25rem 1rem;
-    border-radius: 1rem;
-    border: solid white;
-    width: 356px;
-    height: 200px;
-}
-
-.tg {
-    background-color: white;
-    padding: 5% 0 5% 0;
-}
-
-.tg-block {
-    flex-direction: column;
-    text-align: center;
-    margin: 10% 10% 10% 10%;
-    padding: 5% 0 5% 0;
-
-    border: solid;
-    border-radius: 1rem;
-    background-color: #f1f1f1;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.tg-block h1 {
-    font-family: "Roboto Slab";
-}
-
-.tg-block a {
-    background-color: #008054;
-    color: white;
-    font-variation-settings: "wght" 600;
-    border-radius: 2rem;
-    font-family: "Roboto", serif;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    padding: 1% 3rem;
-    font-size: 16px;
-    transition: background-color .3s;
-    text-decoration: none;
-}
-
-.tg-block svg {
-    display: inline-block;
-    margin: -7px 2px;
-}
-
-.footer {
-    background-color: #008054;
-    border: solid #008054;
-    border-radius: 1rem 1rem 0 0;
-    padding: 0 0 5%;
-}
-
-.footer-content {
-    font-size: 28px;
-    color: white;
-    /*margin: 10% 34% 0;*/
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-
-.footer-links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.footer-link {
-    margin: .25rem .25rem .25rem .25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: .5rem;
-    border: solid #cccccc;
-}
-
-.footer-link svg {
-    display: block;
-    margin: auto;
 }

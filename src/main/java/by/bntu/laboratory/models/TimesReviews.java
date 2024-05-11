@@ -15,15 +15,15 @@ public class TimesReviews implements Publications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "times_id")
-    private Long times_id;
+    private Long timesId;
 
     @Column(name = "title")
     private String title;
     /*@Column(name = "description")
     private String description;*/
 
-    @Column(name = "content", columnDefinition = "TEXT")
-    private String content;
+   /* @Column(name = "content", columnDefinition = "TEXT")
+    private String content;*/
 
     @Column(name = "visible")
     private Boolean visible;
@@ -43,7 +43,7 @@ public class TimesReviews implements Publications {
                     name = "tag_id", referencedColumnName = "tag_id"))
     private Collection<Tags> tags; // Adjusted attribute name to avoid confusion
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "timesReviews")
     private PublicationImages cover = new PublicationImages();
     private Long previewImageId;
 

@@ -118,6 +118,15 @@ public class User implements UserDetails{
             return user;
         }
     }
+    public boolean hasRole(String roleName) {
+        if (this.roles == null) {
+            return false;
+        }
+        return this.roles.stream()
+                .anyMatch(role -> role.getAuthority().equals(roleName));
+    }
+
+
     //security
 
 //    @Override

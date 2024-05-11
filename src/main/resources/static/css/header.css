@@ -1,5 +1,86 @@
+/* Стили для экранов шириной 600px и меньше */
+/*@media (max-width: 600px) {
+    .navbar_container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar_component {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .navbar_menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+!* Стили для экранов шириной от 601px до 900px *!
+@media (min-width: 601px) and (max-width: 900px) {
+    .navbar_container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .navbar_component {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .navbar_menu {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+!* Стили для экранов шириной 901px и больше *!
+@media (min-width: 901px) {
+    .navbar_container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .navbar_component {
+        width: 80%;
+        padding: 2rem;
+    }
+
+    .navbar_menu {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}*/
+@media (min-width: 1000px) {
+    .navbar_toggle {
+        display: none; /* Скрываем navbar_toggle */
+    }
+   /* .navbar-menu-right {
+        display: block; !* Отображаем navbar-menu-right *!
+    }*/
+.navbar-dropdown{
+    display: none;
+}
+}
+
+/* Стили для экранов шириной менее 1000px */
+@media (max-width: 999px) {
+    .navbar_toggle {
+        display: block; /* Отображаем navbar_toggle */
+    }
+    .navbar-menu-right {
+        display: none; /* Скрываем navbar-menu-right */
+    }
+}
+.navbar-dropdown{
+    display: none;
+}
+.navbar-dropdown-content{
+    display: flex;
+    flex-direction: column;
+}
 .navbar_container{
-    width: 100%;
+    width: 90%;
     background-color: rgba(0,0,0,0);
     align-items: center;
     padding-left: 5%;
@@ -15,8 +96,8 @@
 }
 
 .navbar_component{
-    z-index: 1;
-    width: 100%;
+    z-index: 3;
+    width: 90%;
     /* height: 100%; */
     max-width: 80rem;
     grid-column-gap: 2rem;
@@ -24,6 +105,7 @@
     border-radius: 16px;
     background-color: #ffffff;
     justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
@@ -78,7 +160,19 @@
     align-items: center;
     display: flex;
 }
+.navbar_toggle {
+    cursor: pointer; /* Добавляем указатель */
+}
 
+/*.navbar-menu-right {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease-in-out;
+}*/
 .navbar_dropdown {
     padding: .75rem 2.5rem .75rem 1rem;
     grid-column-gap: 1rem;
@@ -150,6 +244,16 @@
     font-size: .88rem;
     transition: background-color .2s;
     display: flex;
+}
+.navbar_dp_link {
+    font-variation-settings: "wght"600;
+    border-radius: 100rem;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    margin: .75rem;
+    font-size: .88rem;
+    transition: background-color .2s;
+    display: block;
 }
 .w-nav-link {
     vertical-align: top;

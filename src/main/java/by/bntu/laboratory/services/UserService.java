@@ -1,9 +1,12 @@
 package by.bntu.laboratory.services;
 
+import by.bntu.laboratory.models.RegistrationCode;
 import by.bntu.laboratory.models.Role;
 import by.bntu.laboratory.models.User;
+import by.bntu.laboratory.repo.RegistrationCodeRepository;
 import by.bntu.laboratory.repo.RoleRepository;
 import by.bntu.laboratory.repo.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -26,22 +29,25 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final RoleService roleService;
-    public boolean createUser(User user) {
+    private final RegistrationCodeRepository registrationCodeRepository;
+@Transactional
+    public boolean createUser(User user, RegistrationCode code) {
         String email = user.getEmail();
         if (userRepository.findByEmail(email) != null) return false;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
 
         // Создаем объект Role и сохраняем его
-        Role userRole = roleRepository.findByName("User"); // Предположим, что у вас есть метод findByName в репозитории ролей
+        Role userRole = roleRepository.findByName("User");
         if (userRole == null) {
             userRole = new Role("User");
             roleRepository.save(userRole);
         }
 
         // Устанавливаем роль пользователю
-        user.setRoles(Collections.singleton(userRole));
-
+        //user.setRoles(Collections.singleton(userRole));
+        changeUserRoles(user, new HashSet<>(Collections.singleton(code.getRole())));
+        registrationCodeRepository.deleteRegistrationCodeByCode(code.getCode());
         log.info("Saving new User with username: " + user.getUsername());
         userRepository.save(user);
         return true;

@@ -1,0 +1,122 @@
+@media (min-width: 1000px) {
+    .news {
+        background-color: #008054;
+        display: flex;
+        flex-direction: row;
+    }
+    .news-card-image img{
+        width: 140px;
+        height: 95px;
+    }
+}
+
+@media (max-width: 999px) {
+    .news {
+        background-color: #008054;
+        display: flex;
+        flex-direction: column;
+    }
+    .news-card{
+        margin-left: 1%;
+        margin-right: 4%;
+        width: 96%;
+        max-width: 96%;
+        min-width: 94%;
+    }
+    .news-link{
+        flex-direction: column;
+    }
+    .news-card-image img{
+        width: 260px;
+        height: 200px;
+    }
+}
+@media (min-width: 1000px) and (max-width: 1200px){
+    .news-card{
+        height: 200px;
+    }
+}
+.news a:link {
+    text-decoration: none;
+}
+
+.news h1 {
+    font-family: "Roboto Slab";
+    font-weight: bold;
+    color: white;
+}
+
+.news h2 {
+    font-family: "Roboto Slab";
+    font-weight: bold;
+}
+
+.news h3 {
+    font-family: "Roboto Slab";
+    font-weight: bold;
+}
+
+.news p {
+    font-family: "Roboto";
+
+    border-radius: 25px;
+}
+
+.news a {
+    background-color: white;
+    color: black;
+    font-variation-settings: "wght" 600;
+    border-radius: 25px;
+    align-items: center;
+    padding: 2% 2%;
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: .88rem;
+    transition: background-color .2s;
+    display: flex;
+}
+
+.news a:hover {
+    color: #6c68ad;
+}
+
+.news-card p {
+    font-family: "Roboto";
+}
+
+/*.news-card{*/
+/*    border-radius: 25px;*/
+/*    background-color: white;*/
+/*    display: flex;*/
+/*    margin-top: 1rem;*/
+
+/*    !*margin-right: 20%;*!*/
+/*    animation: fadeIn .5s ease-in-out;*/
+/*    animation-delay: .5s;*/
+/*}*/
+
+.news-card-image img {
+    border-radius: 25px;
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+
+.news-card-details {
+    margin: 1rem 3rem 1rem 1rem;
+}
+
+.news-link {
+    display: block; /* Делаем ссылку блочным элементом */
+    border-radius: 25px; /* Закругляем углы, чтобы соответствовать стилю .news-card */
+    background-color: white; /* Устанавливаем фоновый цвет */
+    margin-top: 1rem; /* Отступ сверху, если это необходимо */
+    width: 100%; /* Ширина равна 100% от родительского контейнера */
+    height: 100%; /* Высота равна 100% от родительского контейнера */
+}
+
+.news-card {
+    width: 80%; /* Ширина равна 100% от родительского контейнера */
+    border-radius: 25px; /* Закругляем углы */
+    background-color: white; /* Устанавливаем фоновый цвет */
+    margin-top: 1rem; /* Отступ сверху, если это необходимо */
+}

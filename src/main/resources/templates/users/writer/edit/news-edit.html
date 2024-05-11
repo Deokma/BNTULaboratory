@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить проект</title>
+    <title>Add News</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link th:rel="stylesheet" th:href="@{/assets/summernote/summernote-bs4.css}"/>
@@ -37,55 +37,52 @@
 <header th:insert="~{components/header :: header}"></header>
 <div class="container mt-2">
     <div class="card">
-        <h1 class="card-header">Добавить событие</h1>
+        <h1 class="card-header">Редактировать новость</h1>
         <div class="card-body">
-            <form action="/times/add" method="post" th:object="${times}" enctype="multipart/form-data">
+            <form th:action="@{/writer/news/edit/{id}(id=${news.getNewsId()})}" method="post" th:object="${news}" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title" class="text-dark">Заголовок:</label>
-                    <input type="text" name="title" id="title" th:field="*{title}" placeholder="Введите заголовок"
-                           class="form-control" required>
+                    <input type="text" name="title" id="title" th:field="*{title}" placeholder="Введите заголовок" class="form-control" required>
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                 </div>
                 <div class="form-group">
-                    <label for="content">Content:</label>
-                    <textarea type="text" rows="4" id="content" th:field="*{content}" placeholder="Content"
-                              class="form-control"
+                    <label for="content">Содержимое:</label>
+                    <textarea type="text" rows="4" id="content" th:field="*{content}" placeholder="Content" class="form-control"
                               autocomplete="off"></textarea>
+                    <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
                 </div>
-<!--                <div class="form-group">-->
-<!--                    <label for="description" class="text-dark">Описание:</label>-->
-<!--                    <textarea name="description" id="description" placeholder="Введите описание" class="form-control" required></textarea>-->
-<!--                </div>-->
+                <div class="form-group">
+                    <label for="description" class="text-dark">Описание:</label>
+                    <textarea name="description" id="description" th:field="*{description}" placeholder="Введите описание" class="form-control" required></textarea>
+                    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                </div>
                 <div class="form-group">
                     <label class="text-dark">Обложка:</label>
-                    <!--<select id="file-type-select" class="form-control form-control-sm">
-                        <option value="file">File</option>
-                        <option value="link">Link</option>
-                    </select>-->
                     <div id="file-input">
                         <label for="file" class="text-dark">Загрузите Файл:</label>
-                        <input type="file" name="cover" th:field="*{cover}" id="file" class="form-control-file">
-                    </div>
-                    <!--<div id="link-input" style="display:none;">
-                        <label for="coverLink" class="text-dark">Enter Link:</label>
-                        <input type="text" name="coverLink" id="coverLink" class="form-control">
-                    </div>-->
-                </div>
-                <div class="form-group">
-                    <div id="link-input">
-                        <label for="coverLink" class="text-dark">Введите ссылку на Times:</label>
-                        <input type="text" name="link" th:field="*{link}" id="coverLink" class="form-control">
+                        <input type="file" name="cover" id="file" class="form-control-file">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tagsInput" class="text-dark">Tags:</label>
+                    <label for="tagsInput" class="text-dark">Теги:</label>
                     <select id="tagsInput" multiple="multiple" class="form-control js-example-basic-multiple" style="width:100%">
                         <!-- Use Thymeleaf to generate options based on data from the database -->
-                        <option th:each="tag : ${tags}" th:value="${tag.getTagId()}" th:text="${tag.getName()}"></option>
+                        <option th:each="tag : ${tags}" th:value="${tag.getName()}" th:text="${tag.getName()}"></option>
                     </select>
                 </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" name="visible" id="visible" class="form-check-input" th:checked="${visible}">
+                    <label for="visible" class="form-check-label">Отображать</label>
+                </div>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                <button type="submit" class="btn btn-success">Add Project</button>
+                <button type="submit" class="btn btn-success">Обновить</button>
             </form>
+            <div class="col-4">
+                <form method="post" th:action="@{/writer/news/delete/{id}(id=${news.getNewsId()})}" enctype="multipart/form-data">
+                    <button type="submit" class="btn btn-danger btn-lg">Удалить</button>
+                </form>
+            </div>
+            <span th:text="${error}"></span>
         </div>
     </div>
 </div>
@@ -108,6 +105,15 @@
             placeholder: 'Type or select tags',
         });
 
+        // Get the newsTags from the model
+        var newsTags = [[${newsTags}]];
+
+        // Set the selected values
+        $('#tagsInput').val(newsTags);
+
+        // Notify Select2 to update the selection
+        $('#tagsInput').trigger('change');
+
         // Add event handler for form submission
         $('form').submit(function() {
             var tags = $('#tagsInput').val(); // Get selected tag values
@@ -119,6 +125,7 @@
             }).appendTo('form');
         });
     });
+
 
     var fileInput = document.getElementById("file-input");
     var linkInput = document.getElementById("link-input");
@@ -134,5 +141,6 @@
         }
     });
 </script>
+
 </body>
 </html>

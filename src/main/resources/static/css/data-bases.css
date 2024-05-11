@@ -1,0 +1,196 @@
+@media (min-width: 1000px) {
+    .db-card {
+        width: 420px;
+    }
+    .db-card {
+        max-width: 20rem;
+        background-color: white;
+        border-radius: 25px;
+        border-style: solid;
+        margin-left: .5rem;
+        margin-right: .5rem;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem; /* Добавьте это, чтобы создать отступ вокруг содержимого */
+    }
+    .db-cards {
+        display: flex;
+        margin-top: 5%;
+        flex-direction: row;
+    }
+
+    .db-top a {
+        background-color: #008054;
+        color: white;
+        font-variation-settings: "wght" 600;
+        border-radius: 50px;
+        align-items: center;
+
+        font-family: "Roboto";
+        padding: 3% 4rem;
+        font-size: 16px;
+        transition: background-color .3s;
+        display: flex;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 999px) {
+    .db-top {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .db-cards {
+        display: block;
+        flex-direction: column;
+        margin-top: 5%;
+    }
+    .db-card {
+        max-width: 20rem;
+        background-color: white;
+        border-radius: 25px;
+        border-style: solid;
+        margin-left: .5rem;
+        margin-right: .5rem;
+        flex-direction: row;
+        padding: 1rem; /* Добавьте это, чтобы создать отступ вокруг содержимого */
+    }
+    .db-card {
+        margin: 5% 0% 0 0%;
+        width: 80%;
+    }
+
+    .db-top a {
+        background-color: #008054;
+        color: white;
+        font-variation-settings: "wght" 600;
+        border-radius: 50px;
+        align-items: center;
+
+        font-family: "Roboto";
+        padding: 4% 3rem;
+        font-size: 18px;
+        transition: background-color .3s;
+        display: flex;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .db-top a {
+        background-color: #008054;
+        color: white;
+        font-variation-settings: "wght" 600;
+        border-radius: 50px;
+        align-items: center;
+
+        font-family: "Roboto";
+        padding: 4% 3rem;
+        font-size: 18px;
+        transition: background-color .3s;
+        display: flex;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 750px) {
+    .db-top a {
+        background-color: #008054;
+        color: white;
+        font-variation-settings: "wght" 600;
+        border-radius: 50px;
+        align-items: center;
+
+        font-family: "Roboto";
+        padding: 4% 3rem;
+        font-size: 16px;
+        transition: background-color .3s;
+        display: flex;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .db-top a {
+        background-color: #008054;
+        color: white;
+        font-variation-settings: "wght" 900;
+        border-radius: 50px;
+        align-items: center;
+
+        font-family: "Roboto";
+        padding: 5% 2rem;
+        font-size: 16px;
+        transition: background-color .3s;
+        display: flex;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .db-top a {
+        background-color: #008054;
+        color: white;
+        font-variation-settings: "wght" 200;
+        border-radius: 50px;
+        align-items: center;
+
+        font-family: "Roboto";
+        padding: 5% 2rem;
+        font-size: 16px;
+        transition: background-color .3s;
+        display: flex;
+        text-decoration: none;
+    }
+}
+
+.data-bases h1 {
+    font-family: "Roboto Slab";
+    margin-right: 20%;
+}
+
+.db-top {
+    display: flex;
+}
+
+.db-top a:link {
+    text-decoration: none;
+    color: white;
+}
+
+.db-top a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.db-top a:hover {
+    background-color: #006642;
+}
+
+
+
+
+.db-card a {
+    margin-top: auto; /* Добавьте это */
+    margin-left: 1rem;
+    color: #008054;
+    font-family: "Roboto";
+    font-weight: bold;
+}
+
+.db-card a:hover {
+    color: #006642;
+}
+
+.db-card h2 {
+    font-family: "Roboto Slab";
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.db-card p {
+    font-family: "Roboto";
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

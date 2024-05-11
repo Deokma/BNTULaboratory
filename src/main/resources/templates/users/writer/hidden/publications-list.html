@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
+    <link href="/css/index.css" rel="stylesheet">
+
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     -->
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div class="container">
+    <h1>Публикационные активности</h1>
+
+    <!-- Iterate over each news item -->
+    <div>
+        <ul class="cards" th:each="publ,iterStat : ${publicationList}">
+            <li th:classappend="${!publ.visible} ? 'hidden'" class="card-publ" >
+                <img class="card-image" th:src="@{/images/{id}(id=${publ.getPreviewImageId()})}" alt="Картинка">
+                <div class="card-content">
+                    <div class="card-info">
+                        <div class="card-title">
+                            <h2><a style="text-decoration: none; color: black;" th:text="${publ.getTitle()}"
+                                   th:href="@{/writer/publication/edit/{publId}(publId=${publ.getPublId()})}"></a></h2>
+
+                            <p th:text="${publ.getDescription()}"></p>
+                        </div>
+                        <div th:each="publPage : ${publ.getPublicationActivitiesPages()}"
+                             th:classappend="${!publPage.visible} ? 'hidden-page'" class="card-links">
+                            <a th:href="@{/writer/publication-page/edit/{publPageId}(publPageId=${publPage.getPageId()})}"
+                               th:text="${publPage.getTitle()}"></a>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-page">
+                    <h2 th:text="'0' +${iterStat.index + 1}"></h2>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

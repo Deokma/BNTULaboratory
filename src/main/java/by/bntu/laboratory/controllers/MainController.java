@@ -1,13 +1,8 @@
 package by.bntu.laboratory.controllers;
 
-import by.bntu.laboratory.models.EventsCalendar;
-import by.bntu.laboratory.models.News;
-import by.bntu.laboratory.models.Projects;
-import by.bntu.laboratory.models.TimesReviews;
-import by.bntu.laboratory.repo.EventsRepository;
-import by.bntu.laboratory.repo.NewsRepository;
-import by.bntu.laboratory.repo.ProjectsRepository;
-import by.bntu.laboratory.repo.TimesRepository;
+import by.bntu.laboratory.models.*;
+import by.bntu.laboratory.repo.*;
+import by.bntu.laboratory.services.NewsServices;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +34,12 @@ public class MainController {
     private EventsRepository eventsRepository;
     @Autowired
     private TimesRepository timesRepository;
-
+    @Autowired
+    private DataBaseRepository dataBaseRepository;
+    @Autowired
+    private OnlineServicesRepository onlineServicesRepository;
+    @Autowired
+    private PublicationActivitiesRepository publicationActivitiesRepository;
 
     /**
      * Go to main page
@@ -49,18 +49,24 @@ public class MainController {
     public String main(Model model) {
         Pageable newsPageable = PageRequest.of(0, 4); // Получаем только последние 4 элемента
         List<News> latestNews = newsRepository.findLast3ByOrderByDateDesc(newsPageable);
-        Pageable projectsPageable = PageRequest.of(0, 6); // Получаем только последние 4 элемента
+        Pageable projectsPageable = PageRequest.of(0, 6); // Получаем только последние 6 элемента
         List<Projects> projectsList = projectsRepository.findAll();
-        Pageable eventsPageable = PageRequest.of(0, 3); // Получаем только последние 4 элемента
+        Pageable eventsPageable = PageRequest.of(0, 3); // Получаем только последние 3 элемента
         List<EventsCalendar> eventsCalendarsList = eventsRepository.findLast3ByOrderByDateDesc(eventsPageable);
-        Pageable timesPageable = PageRequest.of(0, 3); // Получаем только последние 4 элемента
-        List<TimesReviews> timesCalendarsList = timesRepository.findLast3ByOrderByDateDesc(timesPageable);
+        Pageable timesPageable = PageRequest.of(0, 3); // Получаем только последние 3 элемента
+        List<TimesReviews> timesList = timesRepository.findLast3ByOrderByDateDesc(timesPageable);
+        List<DataBases> dataBasesList = dataBaseRepository.findTop3ByOrderByDbIdDesc();
+        List<OnlineServices> onlineServicesList = onlineServicesRepository.findAll();
+        List<PublicationActivities> publicationActivitiesList = publicationActivitiesRepository.findAll();
 
         model.addAttribute("latestNews", latestNews);
+        model.addAttribute("publicationsList", publicationActivitiesList);
         model.addAttribute("projectsList", projectsList);
         model.addAttribute("eventsList", eventsCalendarsList);
-        model.addAttribute("timesList", timesCalendarsList);
-
+        model.addAttribute("timesList", timesList);
+        model.addAttribute("dataBasesList", dataBasesList);
+        model.addAttribute("onlineServicesList", onlineServicesList);
+        //model.addAttribute("emptyOrAllHiddenNews", newsServices.isNewsListEmptyOrAllHidden(latestNews));
         return "index";
     }
 

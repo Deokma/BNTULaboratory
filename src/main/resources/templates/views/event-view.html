@@ -15,7 +15,7 @@
     <!-- Изображение новости -->
     <!--    <img th:src="@{/images/{id}(id=${news.getPreviewImageId()})}" alt="" class="news-image">-->
     <!-- Дата публикации новости -->
-    <!--    <p th:text="${#dates.format(project.get().getDate(), 'dd.MM.yyyy')}" class="news-date"></p>-->
+        <p th:text="${#dates.format(events.get().getDate(), 'dd.MM.yyyy')}" class="news-date"></p>
     <!-- Описание новости -->
     <!--    <p th:text="${news.description}" class="news-description"></p>-->
     <!-- Контент новости -->

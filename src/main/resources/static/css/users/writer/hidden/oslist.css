@@ -1,0 +1,58 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 6rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    border: solid #222222;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    margin: 0.5rem;
+    color: #222222;
+    text-decoration: none;
+    transition: all 0.3s;
+    width: calc(25% - 1rem); /* Вычисление ширины для 4 карточек в ряд */
+    height: 200px; /* Высота карточек */
+}
+
+.card:hover {
+    background-color: #008054;
+    color: white;
+}
+
+.card-body {
+    padding: 1rem;
+    text-align: center;
+}
+
+.card-data {
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin: 0.5rem 0;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.hidden {
+    background-color: #f0f0f0;
+}
+
+@media (max-width: 999px) {
+    .card {
+        width: calc(50% - 1rem); /* Адаптация ширины для меньших экранов */
+        height: 240px; /* Высота карточек для меньших экранов */
+    }
+}

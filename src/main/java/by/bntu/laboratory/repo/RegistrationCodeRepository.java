@@ -13,5 +13,6 @@ public interface RegistrationCodeRepository extends JpaRepository<RegistrationCo
     boolean existsByCode(String code);
     RegistrationCode findByCode(String code);
     List<RegistrationCode> findByRole(Role role);
+    void deleteRegistrationCodeByCode(String code);
 
 }

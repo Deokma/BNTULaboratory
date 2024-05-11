@@ -1,0 +1,41 @@
+@media (max-width: 690px) {
+    .button-container,
+    .codes-container {
+        flex-direction: column;
+    }
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30%;
+    margin-right: 30%
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+}
+
+.codes-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}

@@ -1,16 +1,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="events-calendar" th:fragment="event-calendar">
-    <div style="padding: 4rem 10% 0 10% ;">
+    <div class="events-calendar-padding">
         <div class="ec-top">
             <h1>Календарь событий</h1>
-            <div style="margin-top: 1rem; margin-left: 10rem;">
+            <div class="ec-top-text">
                 <p>Текст какой-нибудь очень интересныйбудет супер пупер классно, если в две строчки даже его </p>
                 <a th:href="@{/events}">Смотреть все базы события</a>
             </div>
         </div>
         <div class="ec-cards">
-            <div th:each="event : ${eventsList}">
-                <a class="ec-card" th:href="@{/event/{id}(id=${event.getEvent_id()})}">
+            <div th:each="event : ${eventsList}" th:if="${event.visible}">
+                <a class="ec-card" th:href="@{/event/{id}(id=${event.getEventId()})}">
                     <img th:src="@{/images/{id}(id=${event.getPreviewImageId()})}"
                          alt="">
                     <h2 th:text="${event.getTitle()}"></h2>

@@ -13,4 +13,5 @@ public interface EventsRepository extends JpaRepository<EventsCalendar, Long> {
     List<EventsCalendar> findTop3ByOrderByDateDesc(Pageable events);
     List<EventsCalendar> findLast3ByOrderByDateDesc(Pageable events);
     List<EventsCalendar> findEventsCalendarByTags_TagId(Long tagId);
+    EventsCalendar findEventsCalendarByEventId(Long id);
 }

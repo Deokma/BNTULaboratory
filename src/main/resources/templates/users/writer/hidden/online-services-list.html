@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
+    <link rel="stylesheet" href="/css/online-services.css">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     -->
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div class="container">
+    <h1>Сервисы</h1>
+
+    <div class="row">
+        <!-- Iterate over each news item -->
+
+        <div class="online-services-content" th:each="os : ${onlineServicesList}">
+            <a th:classappend="${!os.visible} ? 'hidden-os'" class="onl-serv-card" th:href="@{/writer/online-service/edit/{id}(id=${os.getOsID()})}">
+                <div class="onl-serv-card-center">
+                    <div th:utext="${os.getCover()}"></div>
+                    <p th:text="${os.getTitle()}"></p>
+                </div>
+            </a>
+        </div>
+
+        <!--<div class="online-services-content" th:each="os : ${onlineServicesList}" th:if="${os.visible}">
+            <a class="onl-serv-card" th:href="${os.getLink()}">
+                <div class="onl-serv-card-center">
+                    <div th:utext="${os.getCover()}"></div>
+                    <p th:text="${os.getTitle()}"></p>
+                </div>
+            </a>
+        </div>-->
+    </div>
+</div>
+</body>
+</html>

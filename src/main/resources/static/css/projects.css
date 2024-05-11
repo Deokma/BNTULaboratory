@@ -1,0 +1,204 @@
+@media (min-width: 1000px) {
+    .projects-top {
+        display: flex;
+        margin-top: 2%;
+        margin-left: 5%;
+    }
+    .slide-details {
+        background-color: #6c68ad;
+        display: flex;
+        font-family: "Roboto Slab";
+        color: white;
+        border-radius: 2rem;
+        flex-direction: column;
+        justify-content: space-around;
+        min-width: 40%;
+        min-height: 30%;
+        max-width: 40%;
+        max-height: 30%;
+        margin: 0 0 3rem 3rem;
+        padding: 1rem 1rem 1rem 1rem;
+    }
+    .projects-top-text{
+        right: 20%;
+        position: absolute;
+     /*   margin-top: 1rem*/
+    }
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 85%;
+        overflow: hidden;
+    }
+    .carousel-content{
+        margin-top: 3rem;
+        padding-left: 3rem
+    }
+    .slide {
+        display: flex;
+        flex: 0 0 auto;
+        width: 85%;
+        height:40rem;
+        min-height: 40rem;
+        margin-right: 2rem; /* Пространство между слайдами */
+        background-size: cover; /* Заполнение всего div фоном */
+        background-repeat: no-repeat; /* Отключение повторения фона */
+        border-radius: 25px;
+        justify-content: left; /* Расположение внизу */
+        align-items: end;
+    }
+    .slide::after{
+        content: '';
+        display: block;
+        height: 200px;
+    }
+    .projects-padding{
+        padding: 2% 5% 0 5% ;
+    }
+}
+@media(max-width: 999px){
+    .projects-top {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2%;
+        margin-left: 5%;
+    }
+    .projects-top-text{
+        right: 20%;
+        margin-top: 1rem
+    }
+    .slide-details {
+        background-color: #6c68ad;
+        display: flex;
+        font-family: "Roboto Slab";
+        color: white;
+        border-radius: 1rem;
+        flex-direction: column;
+        justify-content: space-around;
+        min-width: 40%;
+        min-height: 30%;
+        /* max-width: 40%; */
+        /* max-height: 30%; */
+        /* margin: 0 0 3rem 3rem; */
+        padding: 1rem 1rem 1rem 1rem;
+    }
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 30%;
+        overflow: hidden;
+    }
+    .carousel-content{
+        margin-top: 3rem;
+        padding-left: 4%;
+    }
+    .slide {
+        display: flex;
+        flex: 0 0 auto;
+        width: 94%;
+        height:35rem;
+        min-height: 40rem;
+        margin-right: 1rem; /* Пространство между слайдами */
+        background-size: cover; /* Заполнение всего div фоном */
+        background-repeat: no-repeat; /* Отключение повторения фона */
+        border-radius: 25px;
+        justify-content: left; /* Расположение внизу */
+        align-items: end;
+    }
+    .slide::after{
+        content: '';
+        display: block;
+        height: 200px;
+    }
+}
+
+.projects {
+    background-color: #008054;
+    border-radius: 32px;
+}
+
+.slide-details a{
+    color: white;
+}
+
+.projects-top h1 {
+    color: white;
+    font-family: "Roboto Slab", serif;
+}
+
+.projects-top a {
+    background-color: white;
+    color: black;
+    font-variation-settings: "wght" 600;
+    border-radius: 50px;
+    align-items: center;
+    padding: 3% 3%;
+    font-family: "Roboto", serif;
+
+    max-width: 14rem;
+    transition: background-color .3s;
+    display: flex;
+    text-decoration: none;
+}
+
+.projects-top a:hover {
+    background-color: #006642;
+    color: white;
+    align-items: center;
+}
+
+.projects-top p {
+    color: white;
+}
+
+
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+
+/*.slide.slide-placeholder {*/
+/*    background-image: url('/static/images/projects.png'); !* Установка фонового изображения *!*/
+/*    background-size: cover; !* Заполнение всего div фоном *!*/
+/*    background-repeat: no-repeat; !* Отключение повторения фона *!*/
+/*    border-radius: 25px;*/
+/*    justify-content: left; !* Расположение внизу *!*/
+/*    align-items: end;*/
+/*    flex: 0 0 auto;*/
+/*    width: 85%;*/
+/*    margin-right: 2rem; !* Пространство между слайдами *!*/
+/*}*/
+
+.slide img {
+    width: 100%;
+}
+
+
+.slide-details a:link{
+    text-decoration: none;
+    color: white;
+}
+
+.carousel-button{
+    border-radius: 50%;
+    align-items: center;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    background-size: 100% 100%;
+    font-family: "Roboto", serif;
+    font-weight: bold;
+    font-size: .88rem;
+    transition: background-color .2s;
+}
+
+.carousel-svg path {
+    fill: white;
+}
+
+.carousel-button:hover .carousel-svg path {
+    fill: #e8e8e9;
+}
+

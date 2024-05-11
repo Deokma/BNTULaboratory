@@ -1,0 +1,147 @@
+@media (min-width: 1000px) {
+    .ec-cards {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        margin: 0 10% 0 10%;
+    }
+    .ec-top {
+        display: flex;
+        font-family: "Roboto";
+    }
+    .ec-top-text{
+        margin-top: 1rem;
+        margin-left: 10rem;
+    }
+    .ec-card img {
+        margin: .25rem 1rem .25rem 1rem;
+        border-radius: 1rem;
+        border: solid white;
+        width: 356px;
+        height: 200px;
+    }
+    .ec-card {
+        display: flex;
+        flex-direction: column;
+        border: solid #f4eff5;
+        border-radius: 1rem;
+        margin: .25rem .25rem .25rem .25rem;
+        transition: .2s border;
+    }
+    .events-calendar-padding{
+        padding: 4rem 10% 0 10%;
+    }
+}
+@media(max-width: 500px){
+
+}
+
+@media (max-width: 999px) {
+    .ec-top h1{
+        margin-left: 3%;
+    }
+    .ec-cards {
+        display: block;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .ec-top {
+        display: flex;
+        flex-direction: column;
+        font-family: "Roboto";
+    }
+    .ec-card {
+        display: flex;
+        flex-direction: column;
+        border: solid #f4eff5;
+        border-radius: 1rem;
+        margin: .25rem .25rem .25rem .25rem;
+        transition: .2s border;
+    }
+    .ec-card img {
+        margin: .25rem 1rem .25rem 1rem;
+        border-radius: 1rem;
+        border: solid white;
+        height: 200px;
+    }
+    .ec-top-text{
+        margin-top: 1rem;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
+
+.events-calendar {
+    display: block;
+    flex-direction: column;
+}
+
+.events-calendar a:link {
+    text-decoration: none;
+    color: black;
+}
+
+.events-calendar a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.ec-top {
+    display: flex;
+    font-family: "Roboto";
+}
+
+.ec-top a:link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.ec-top a:visited {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.ec-top h1 {
+    font-size: 38px;
+    font-family: "Roboto Slab";
+}
+
+.ec-top a {
+    background-color: #008054;
+    color: white;
+    font-variation-settings: "wght" 600;
+    border-radius: 50px;
+    align-items: center;
+    padding: 3% 2%;
+    font-family: "Roboto";
+
+    max-width: 14rem;
+    transition: background-color .3s;
+    display: flex;
+}
+
+.ec-top a:hover {
+    background-color: #006642;
+}
+
+
+
+.ec-card a {
+    font-weight: normal;
+    text-decoration: none;
+    color: black;
+}
+
+.ec-card:hover {
+    border: solid #008054;
+    transition: .2s border;
+}
+
+.ec-card h2 {
+    padding: 0 1rem 0 1rem;
+}
+
+.ec-card p {
+    padding: 0 1rem 0 1rem;
+}
+

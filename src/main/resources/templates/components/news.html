@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="news" th:fragment="news">
-    <div class="" style="margin-left: 8%; margin-right: 5%; margin-top: 3rem;">
+    <div class="news-top" style="margin-left: 8%; margin-right: 5%; margin-top: 3rem;">
         <div><h1>Новости</h1>
             <p style="color: white;">Текст какой-нибудь очень интересныйбудет супер пупер классно, если в две строчки
                 даже его </p>
@@ -10,11 +10,10 @@
     <div style="margin-top: 2rem; margin-bottom: 5rem;">
         <div style="margin-top: 2rem; margin-bottom: 5rem;">
             <!-- Используйте Thymeleaf для динамического отображения данных о новостях -->
-            <div th:each="news : ${latestNews}" class="news-card">
+            <div th:each="news : ${latestNews}" th:if="${news.visible}" class="news-card">
                 <a th:href="@{/news/{newsId}(newsId=${news.getNewsId()})}" class="news-link">
                     <div class="news-card-image">
-                        <img th:src="@{/images/{id}(id=${news.getPreviewImageId()})}" alt="" width="140px"
-                             height="95px">
+                        <img th:src="@{/images/{id}(id=${news.getPreviewImageId()})}" alt="Картинка">
                     </div>
                     <div class="news-card-details">
                         <h3 th:text="${news.title}"></h3>

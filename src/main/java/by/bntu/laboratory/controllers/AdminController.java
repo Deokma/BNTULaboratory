@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Controller with admin functions
@@ -34,7 +33,6 @@ import java.util.Objects;
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
-    private final RegistrationCodeService registrationCodeService;
     private final RegistrationCodeRepository registrationCodeRepository;
     private final RoleRepository roleRepository;
 
@@ -101,6 +99,7 @@ public class AdminController {
         generateAndSaveCodeForRole("Admin");
         return "redirect:/admin/codes";
     }
+
     @PostMapping("/admin/generate-writer-code")
     public String generateWriterCode() {
         generateAndSaveCodeForRole("Writer");
@@ -130,6 +129,5 @@ public class AdminController {
     private String generateUniqueCode() {
         return RandomStringUtils.randomAlphanumeric(15);
     }
-
 
 }

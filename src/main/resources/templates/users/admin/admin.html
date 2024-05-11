@@ -3,13 +3,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Panel</title>
+    <title>Панель администратора</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
 <h2 style="padding-top: 6rem" class="container text-dark">Панель администратора</h2>
+
+<div class="col-md-4">
+    <div style="align-items: center; margin:3% 0 3% 35%">
+        <a class="btn btn-primary" th:href="@{/admin/codes}">Коды</a>
+    </div>
+</div>
+
+
 <table class="table table-light table-striped container">
     <tr>
         <th scope="col">Имя</th>
