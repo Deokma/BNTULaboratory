@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Проекты</title>
+    <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
+    <!-- Include Bootstrap CSS -->
+   </head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div style="padding-top: 6rem" class="container">
+    <h1>Список проектов</h1>
+    <div class="row-project" th:if="${emptyOrAllHidden}">
+        <div class="centered-message">
+            <h2>Проекты скоро появятся</h2>
+        </div>
+    </div>
+
+    <div class="row-project">
+        <!-- Iterate over each news item -->
+        <div class="cards" th:each="project : ${projectsList}" th:if="${project.visible}">
+            <div class="card news-card">
+                <!-- Card body with news title and description -->
+                <a th:href="@{/project/edit/{id}(id=${project.getProjectId()})}" class="card-body">
+                    <img class="card-image" width="300px"
+                         height="165px" th:src="@{/images/{id}(id=${project.getPreviewImageId()})}"></img>
+                    <h5 class="card-title" th:text="${project.title}"></h5>
+                    <p class="card-text" th:text="${project.description}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

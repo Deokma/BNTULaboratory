@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Базы данных</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="/css/data-bases.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div style="padding-top: 6rem" class="container">
+    <h1>Список баз данных</h1>
+
+    <div class="row" th:unless="${#lists.isEmpty(dataBasesList)}">
+        <!-- Iterate over each news item -->
+        <div class="cards" th:each="db : ${dataBasesList}">
+            <div class="card" th:classappend="${!db.visible} ? 'hidden'">
+                <h4 class="card-title" th:text="${db.title}"></h4>
+                <p class="card-text" th:text="${db.description}"></p>
+                <a th:href="@{/writer/data-base/edit/{id}(id=${db.getDbId()})}" class="card-body db-link">Подробнее</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

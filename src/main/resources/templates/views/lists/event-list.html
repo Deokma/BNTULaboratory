@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>События</title>
+    <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'UTC+3',
+                initialView: 'dayGridMonth',
+                height: 'auto'
+               // contentHeight: 600
+            });
+            calendar.setOption('locale', 'ru');
+           // calendar.setOption('contentHeight', '600');
+            calendar.render();
+        });
+
+    </script>
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div style="padding-top: 6rem" class="container">
+    <h1>Список событий</h1>
+    <div class="row" th:if="${emptyOrAllHidden}">
+        <div class="centered-message">
+            <h2>События скоро появятся</h2>
+        </div>
+    </div>
+    <div id='calendar'></div>
+    <div class="row">
+        <!-- Iterate over each news item -->
+        <div class="cards" th:each="event : ${eventCalendarList}" th:if="${event.visible}">
+            <div class="card news-card">
+                <!-- Card body with news title and description -->
+                <a class="card-body" th:href="@{/event/edit/{id}(id=${event.getEventId()})}">
+                    <img class="card-image" width="300px"
+                         height="165px" th:src="@{/images/{id}(id=${event.getPreviewImageId()})}"></img>
+                    <p class="card-data" th:text="${#dates.format(event.date, 'dd.MM.yyyy')}"></p>
+                    <h5 class="card-title" th:text="${event.title}"></h5>
+                    <p class="card-text" th:text="${event.description}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Базы данных</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .centered-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+    <link href="/css/data-bases.css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div style="padding-top: 6rem" class="container">
+    <h1>Список баз данных</h1>
+    <div class="row" th:if="${emptyOrAllHidden}">
+        <div class="centered-message">
+            <h2>Базы данных скоро появятся</h2>
+        </div>
+    </div>
+
+    <div class="row" th:unless="${#lists.isEmpty(dataBasesList)}">
+        <!-- Iterate over each news item -->
+        <div class="col-md-4 db-cards" th:each="db : ${dataBasesList}" th:if="${db.visible}">
+            <div class="db-card">
+                <h2 th:text="${db.title}"></h2>
+                <p th:text="${db.description}"></p>
+                <a th:href="@{/data-base/{id}(id=${db.getDbId()})}">Подробнее</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
