@@ -10,4 +10,6 @@ public interface TimesRepository extends JpaRepository<TimesReviews, Long> {
     List<TimesReviews> findLast3ByOrderByDateDesc(Pageable times);
     List<TimesReviews> findTimesReviewsByTags_TagId(Long tagId);
     TimesReviews findByTimesId(Long timesId);
+    List<TimesReviews> findByTitleContainingIgnoreCase(String title);
+
 }

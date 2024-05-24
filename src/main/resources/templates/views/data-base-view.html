@@ -5,28 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${dataBase.title}"></title>
     <link rel="stylesheet" href="/css/view.css">
+    <link href="/css/footer.css" rel="stylesheet">
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
 <div class="container" style="padding-top: 6rem;">
-    <div class="news-content-container">
+    <div class="content-container">
         <!-- News Content -->
-        <div class="news-content">
-            <h1 th:text="${dataBase.title}" class="news-title"></h1>
+        <div class="content">
+            <h1 th:text="${dataBase.title}" class="title"></h1>
             <div th:if="${usersession.hasRole('Writer')}">
-            <a class="news-content-edit" th:href="@{/data-base/edit/{id}(id=${dataBase.getDbId()})}">Редактировать</a>
+                <a class="news-content-edit"
+                   th:href="@{/writer/data-base/edit/{id}(id=${dataBase.getDbId()})}">Редактировать</a>
             </div>
 
-            <div th:utext="${dataBase.getContent()}" class="news-text"></div>
-            <a href="#" onclick="history.go(-1);" class="back-button">Back</a>
+            <div th:utext="${dataBase.getContent()}" class="text"></div>
         </div>
     </div>
-    <!-- Recommended News -->
-<!--    <div class="recommended-news">-->
-<!--        &lt;!&ndash; Placeholder for recommended news &ndash;&gt;-->
-<!--        <h2>Recommended News</h2>-->
-<!--        &lt;!&ndash; Add recommended news here &ndash;&gt;-->
-<!--    </div>-->
 </div>
+<header th:insert="~{components/footer :: footer}"></header>
 </body>
 </html>

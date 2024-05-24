@@ -32,9 +32,6 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
     private final RegistrationCodeRepository registrationCodeRepository;
-//    @Autowired
-//    private final AvatarImageRepository avatarRepository;
-    // private final AvatarImageService avatarService;
 
     /**
      * Go to registration page
@@ -69,10 +66,6 @@ public class UserController {
             return "authorization/registration";
         }
 
-        // Устанавливаем роль пользователя на основе роли, связанной с кодом регистрации
-       // user.setRoles(Collections.singleton(code.getRole()));
-        //userService.changeUserRoles(user, new HashSet<>(Collections.singleton(code.getRole())));
-        // Регистрируем пользователя
         if (!userService.createUser(user,code)) {
             model.addAttribute("errorMessage", "Пользователь с Email " + user.getEmail() + " Уже существует.");
             return "authorization/registration";
@@ -103,45 +96,4 @@ public class UserController {
         model.addAttribute("isWriter", isWriter);
         return "users/account";
     }
-
-
-
-
-//    @PostMapping("/upload_avatar/{user_id}")
-//    public String uploadImage(@PathVariable("user_id") Long user_id, @RequestParam("avatar") MultipartFile avatar, Model model) {
-//        try {
-//            AvatarImage checkAvatarImage = avatarService.findById(user_id);
-//            if (avatar.isEmpty()) {
-//                model.addAttribute("error", "Please select a file to upload");
-//                return "/account";
-//            }
-//            if (checkAvatarImage.getUser() == null) {
-//                AvatarImage avatarImage = new AvatarImage();
-//                avatarImage.setFileName(avatar.getOriginalFilename());
-//                avatarImage.setData(avatar.getBytes());
-//               // avatarImage.setUser(userService.getCurrentUser());
-//                avatarRepository.save(avatarImage);
-//                return "/account";
-//            } else {
-//                checkAvatarImage.setFileName(avatar.getOriginalFilename());
-//                checkAvatarImage.setData(avatar.getBytes());
-//               // checkAvatarImage.setUser(userService.getCurrentUser());
-//                avatarRepository.save(checkAvatarImage);
-//                return "/account";
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return "error";
-//    }
-
-//    @GetMapping("/avatarImage/{id}")
-//    public ResponseEntity<byte[]> getImage(@PathVariable Long id) throws IOException, ChangeSetPersister.NotFoundException {
-//        AvatarImage avatar = avatarRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
-//
-//        byte[] image = avatar.getData();
-//        final HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_PNG);
-//        return new ResponseEntity<>(image, headers, HttpStatus.OK);
-//    }
 }

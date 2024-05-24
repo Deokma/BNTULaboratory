@@ -5,15 +5,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.hibernate.Hibernate;
-import java.util.*;
+
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +20,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "users")
 @Data
-public class User implements UserDetails{
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -46,32 +44,6 @@ public class User implements UserDetails{
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "role_id"))
     private Collection<Role> roles;
-    /*@ElementCollection( fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles = new HashSet<>();*/
-
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "user_roles",
-//            joinColumns = @JoinColumn(name = "user_id"))
-//    @Enumerated(EnumType.STRING)
-//    private Set<Role> roles = new HashSet<>();
-    /* @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "user_books",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id")
-    )
-    private List<Books> books_list = new ArrayList<>();
-*/
-    //@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    //private AvatarImage avatarImage;
-
-
-
-//    public boolean isAdmin() {
-//        return roles.contains(Role.ADMIN);
-//    }
 
     @Override
     public String getUsername() {
@@ -118,6 +90,7 @@ public class User implements UserDetails{
             return user;
         }
     }
+
     public boolean hasRole(String roleName) {
         if (this.roles == null) {
             return false;
@@ -125,33 +98,4 @@ public class User implements UserDetails{
         return this.roles.stream()
                 .anyMatch(role -> role.getAuthority().equals(roleName));
     }
-
-
-    //security
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return roles;
-//    }
-
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return active;
-//    }
-
 }

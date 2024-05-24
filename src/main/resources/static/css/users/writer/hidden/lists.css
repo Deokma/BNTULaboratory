@@ -1,7 +1,8 @@
-.row {
+.rowL {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: .8rem;
+    flex-direction: row;
 }
 .row-project {
     display: grid;
@@ -11,33 +12,37 @@
 .row-project a:link {
     text-decoration: none;
 }
-.container {
+.containerL {
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 6rem;
 }
+.containerL{
+    font-family: "Roboto Slab";
+}
 
-.cards {
+.cardsL {
     display: inline-grid;
-    /*grid-template-columns: repeat(4, 1fr); !* 4 карточки в линии *!*/
     grid-gap: 1rem;
     justify-content: center;
 }
 
-.card {
+.cardL {
     border: solid;
     border-radius: 1rem;
     margin: .25rem;
     overflow: hidden;
-
+    flex-direction: row;
+}
+.cardL a:link{
+    text-decoration: none;
 }
 
-.card-content {
+.card-contentL {
     padding: 1rem;
 }
 .card-publ {
     display: flex;
-    /* width: 1000px; */
     min-width: 80%;
     margin-top: 1rem;
     margin-right: auto;
@@ -53,12 +58,13 @@
 }
 .card-image {
     border-radius: 25px;
-    width: calc(100% - 1.7rem); /* Ширина изображения с учетом отступов */
+    width: calc(90% - 1.7rem); /* Ширина изображения с учетом отступов */
     height: calc(60% - 2rem); /* Высота изображения подстраивается автоматически */
     object-fit: cover; /* Обрезка изображения для заполнения контейнера без искажения пропорций */
     margin: 0.85rem;
+    align-items: center;
 }
-.card-data{
+.card-data {
     font-size: .85rem;
     margin: 0 0 0 .25rem;
     color: black;
@@ -100,11 +106,11 @@
     transform: translate(-50%, -50%);
     text-align: center;
 }
-.db-link{
+.db-link {
     margin: 0 0 .5rem .5rem;
     color:  #008054;
     font-family: "Roboto";
 }
-.db-link:link{
+.db-link:link {
     text-decoration: none;
 }

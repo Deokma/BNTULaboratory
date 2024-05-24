@@ -1,29 +1,30 @@
 package by.bntu.laboratory.services;
 
-import by.bntu.laboratory.models.News;
 import by.bntu.laboratory.models.PublicationActivities;
 import by.bntu.laboratory.models.PublicationActivitiesPage;
 import by.bntu.laboratory.models.PublicationImages;
-import by.bntu.laboratory.repo.NewsRepository;
+import by.bntu.laboratory.repo.PublicationActivitiesPageRepository;
 import by.bntu.laboratory.repo.PublicationActivitiesRepository;
 import by.bntu.laboratory.repo.PublicationImageRepository;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.webjars.NotFoundException;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
-public class PublicationActivitiesServices {
+public class PublicationActivitiesService {
     @Autowired
     PublicationActivitiesRepository publicationActivitiesRepository;
     @Autowired
     PublicationImageRepository publicationImageRepository;
+    @Autowired
+    private PublicationActivitiesPageRepository publicationActivitiesPageRepository;
+
 
     public void savePubActive(PublicationActivities pubActive, MultipartFile file) throws IOException {
         PublicationImages publicationImages;
@@ -81,10 +82,20 @@ public class PublicationActivitiesServices {
         return publicationActivitiesRepository.findAll();
     }
 
-    public Optional<PublicationActivities> findById(Long pubId) {
-        return publicationActivitiesRepository.findById(pubId);
+    public PublicationActivities findById(Long id) {
+        return publicationActivitiesRepository.findById(id).orElseThrow(() -> new NotFoundException("Publication not found"));
     }
-
+    public PublicationActivitiesPage findPageById(Long publId, Long pageId) {
+        return publicationActivitiesPageRepository.findByPublicationActivities_PublIdAndPageId(publId, pageId)
+                .orElseThrow(() -> new NotFoundException("Page not found"));
+    }
+    public Long getFirstPageId(Long publId) {
+        PublicationActivities publication = findById(publId);
+        return publication.getPublicationActivitiesPages().stream()
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("No pages found for this publication"))
+                .getPageId();
+    }
     public PublicationActivities findByTitle(String title) {
         return publicationActivitiesRepository.findByTitle(title);
     }

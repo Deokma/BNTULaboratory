@@ -15,7 +15,7 @@
         <div>
             <ul class="cards" th:each="publ,iterStat : ${publicationsList}" th:if="${publ.visible}">
                 <li class="card" th:id="'card_'+ ${iterStat.index + 1}">
-                        <img class="card-image" th:src="@{/images/{id}(id=${publ.getPreviewImageId()})}" alt="Картинка">
+                    <img class="card-image" th:src="@{/images/{id}(id=${publ.getPreviewImageId()})}" alt="Картинка">
                     <div class="card-content">
                         <div class="card-info">
                             <div class="card-title">
@@ -23,7 +23,7 @@
                                 <p th:text="${publ.getDescription()}"></p>
                             </div>
                             <div th:each="publPage : ${publ.getPublicationActivitiesPages()}" th:if="${publPage.visible}" class="card-links">
-                                <a th:href="@{/publication-page/{publPageId}(publPageId=${publPage.getPageId()})}" th:text="${publPage.getTitle()}"></a>
+                                <a th:href="@{/publication/{publId}/{publPageId}(publId=${publ.getPublId()}, publPageId=${publPage.getPageId()})}" th:text="${publPage.getTitle()}"></a>
                                 <hr>
                             </div>
                         </div>

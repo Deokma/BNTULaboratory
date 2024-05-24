@@ -33,7 +33,7 @@ public class PublicationImages {
     private News news;
 
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    private EventsCalendar eventsCalendar;
+    private Events events;
 
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private TimesReviews timesReviews;
@@ -43,4 +43,9 @@ public class PublicationImages {
 
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private PublicationActivities publicationActivities;
+
+    @Override
+    public String toString() {
+        return "PublicationImages{id=" + id + "}";
+    }
 }

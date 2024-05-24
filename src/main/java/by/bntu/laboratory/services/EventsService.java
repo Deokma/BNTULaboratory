@@ -1,8 +1,6 @@
 package by.bntu.laboratory.services;
 
-import by.bntu.laboratory.models.EventsCalendar;
-import by.bntu.laboratory.models.News;
-import by.bntu.laboratory.models.Projects;
+import by.bntu.laboratory.models.Events;
 import by.bntu.laboratory.models.PublicationImages;
 import by.bntu.laboratory.repo.EventsRepository;
 import by.bntu.laboratory.repo.PublicationImageRepository;
@@ -18,27 +16,27 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class EventsServices {
+public class EventsService {
     @Autowired
     EventsRepository eventsRepository;
     @Autowired
     PublicationImageRepository publicationImageRepository;
-    public void saveEvent(EventsCalendar eventsCalendar, MultipartFile file) throws IOException {
+    public void saveEvent(Events events, MultipartFile file) throws IOException {
         PublicationImages publicationImages;
         if (file.getSize() != 0) {
             publicationImages = toImageEntity(file);
             publicationImages.setPreviewImage(true);
-            eventsCalendar.addImageToEvent(publicationImages);
+            events.addImageToEvent(publicationImages);
         }
-        log.info("Saving new Project. Title: {}", eventsCalendar.getTitle());
-        EventsCalendar eventsFromDb = eventsRepository.save(eventsCalendar);
+        log.info("Saving new Project. Title: {}", events.getTitle());
+        Events eventsFromDb = eventsRepository.save(events);
         eventsFromDb.setPreviewImageId(eventsFromDb.getCover().getId());
         eventsRepository.save(eventsFromDb);
     }
-    public void saveEventImage(EventsCalendar eventsCalendar, MultipartFile file) throws IOException {
+    public void saveEventImage(Events events, MultipartFile file) throws IOException {
         if (file.getSize() != 0) {
-            EventsCalendar eventCalendarFromDb =
-                    eventsRepository.findEventsCalendarByEventId(eventsCalendar.getEventId());
+            Events eventCalendarFromDb =
+                    eventsRepository.findEventsByEventId(events.getEventId());
             if (eventCalendarFromDb != null && eventCalendarFromDb.getCover() != null) {
                 PublicationImages oldCover = eventCalendarFromDb.getCover();
 
@@ -71,17 +69,17 @@ public class EventsServices {
         image.setBytes(file.getBytes());
         return image;
     }
-    public List<EventsCalendar> getAll() {
+    public List<Events> getAll() {
         return eventsRepository.findAll();
     }
     @Transactional
-    public List<EventsCalendar> findEventsByTagId(Long tagId) {
-        return eventsRepository.findEventsCalendarByTags_TagId(tagId);
+    public List<Events> findEventsByTagId(Long tagId) {
+        return eventsRepository.findEventsByTags_TagId(tagId);
     }
-    public boolean isEventsListEmptyOrAllHidden(List<EventsCalendar> eventsCalendarList) {
-        return eventsCalendarList.isEmpty() || eventsCalendarList.stream().noneMatch(EventsCalendar::getVisible);
+    public boolean isEventsListEmptyOrAllHidden(List<Events> eventsList) {
+        return eventsList.isEmpty() || eventsList.stream().noneMatch(Events::getVisible);
     }
-    public Optional<EventsCalendar> findById(Long imageId) {
+    public Optional<Events> findById(Long imageId) {
         return eventsRepository.findById(imageId);
     }
 }

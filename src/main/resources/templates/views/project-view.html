@@ -3,25 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Details</title>
-    <!-- Здесь подключите ваши стили -->
-    <link rel="stylesheet" href="styles.css">
+    <title th:text="${project.getTitle()}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        .project-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        .project-content {
+            text-align: left;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .project-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .project-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<!-- Здесь может быть ваш шапка сайта -->
+
 <div class="container">
-    <!-- Заголовок новости -->
-    <h1 th:text="${project.get().getTitle()}" class="news-title"></h1>
-    <!-- Изображение новости -->
-<!--    <img th:src="@{/images/{id}(id=${news.getPreviewImageId()})}" alt="" class="news-image">-->
-    <!-- Дата публикации новости -->
-<!--    <p th:text="${#dates.format(project.get().getDate(), 'dd.MM.yyyy')}" class="news-date"></p>-->
-    <!-- Описание новости -->
-<!--    <p th:text="${news.description}" class="news-description"></p>-->
-    <!-- Контент новости -->
-    <div th:utext="${project.get().getContent()}" class="news-content"></div>
-    <!-- Кнопка назад -->
-    <a href="#" onclick="history.go(-1);" class="back-button">Back</a>
+    <img class="project-image" th:src="@{/images/{id}(id=${project.getPreviewImageId()})}" alt="Картинка">
+    <div class="project-content" th:utext="${project.getContent()}">
+        <!-- Контент проекта будет подставлен сюда -->
+    </div>
+    <a href="/project-page-url" class="project-button">Перейти к проекту</a>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

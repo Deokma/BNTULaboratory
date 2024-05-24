@@ -2,22 +2,20 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Новости</title>
+    <title>Публикации</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
     <link href="/css/index.css" rel="stylesheet">
 
-    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-     -->
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
-<div class="container">
+<div class="containerL">
     <h1>Публикационные активности</h1>
 
     <!-- Iterate over each news item -->
     <div>
-        <ul class="cards" th:each="publ,iterStat : ${publicationList}">
+        <ul class="cardsL" th:each="publ,iterStat : ${publicationList}">
             <li th:classappend="${!publ.visible} ? 'hidden'" class="card-publ" >
                 <img class="card-image" th:src="@{/images/{id}(id=${publ.getPreviewImageId()})}" alt="Картинка">
                 <div class="card-content">

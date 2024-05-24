@@ -21,23 +21,12 @@ public class Role implements GrantedAuthority{
     private String name;
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
-//    @ManyToMany
-//    @JoinTable(
-//            name = "roles_privileges",
-//            joinColumns = @JoinColumn(
-//                    name = "role_id", referencedColumnName = "role_id"),
-//            inverseJoinColumns = @JoinColumn(
-//                    name = "privilege_id", referencedColumnName = "privilege_id"))
-//    private Collection<Privilege> privileges;
 
     public Role(String name) {
         this.name = name;
     }
 
-    public Role() {
-
-    }
-
+    public Role() {}
 
     @Override
     public String getAuthority() {

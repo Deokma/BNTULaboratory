@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Базы данных</title>
-    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/header.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .centered-message {
@@ -13,20 +13,29 @@
             transform: translate(-50%, -50%);
             text-align: center;
         }
+        .navbar_container{
+            width: 100%; !important;
+            background-color: rgba(0,0,0,0);
+            align-items: center;
+            padding-left: 5%;
+            padding-right: 5%;
+            display: flex;
+            flex-wrap: nowrap;
+        }
     </style>
     <link href="/css/data-bases.css" rel="stylesheet">
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
-<div style="padding-top: 6rem" class="container">
+<div style="padding-top: 6rem" class="containerL">
     <h1>Список баз данных</h1>
-    <div class="row" th:if="${emptyOrAllHidden}">
+    <div class="row"L th:if="${emptyOrAllHidden}">
         <div class="centered-message">
             <h2>Базы данных скоро появятся</h2>
         </div>
     </div>
 
-    <div class="row" th:unless="${#lists.isEmpty(dataBasesList)}">
+    <div class="rowL" th:unless="${#lists.isEmpty(dataBasesList)}">
         <!-- Iterate over each news item -->
         <div class="col-md-4 db-cards" th:each="db : ${dataBasesList}" th:if="${db.visible}">
             <div class="db-card">

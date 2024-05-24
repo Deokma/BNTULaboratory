@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Новости</title>
+    <title>Сервисы</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
     <link rel="stylesheet" href="/css/online-services.css">
@@ -11,10 +11,10 @@
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
-<div class="container">
+<div class="containerL">
     <h1>Сервисы</h1>
 
-    <div class="row">
+    <div class="rowL">
         <!-- Iterate over each news item -->
 
         <div class="online-services-content" th:each="os : ${onlineServicesList}">

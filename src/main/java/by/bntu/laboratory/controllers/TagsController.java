@@ -1,15 +1,15 @@
 package by.bntu.laboratory.controllers;
 
 
-import by.bntu.laboratory.models.EventsCalendar;
+import by.bntu.laboratory.models.Events;
 import by.bntu.laboratory.models.News;
 import by.bntu.laboratory.models.Projects;
 import by.bntu.laboratory.models.TimesReviews;
 import by.bntu.laboratory.repo.TagsRepository;
-import by.bntu.laboratory.services.EventsServices;
-import by.bntu.laboratory.services.NewsServices;
-import by.bntu.laboratory.services.ProjectsServices;
-import by.bntu.laboratory.services.TimesServices;
+import by.bntu.laboratory.services.EventsService;
+import by.bntu.laboratory.services.NewsService;
+import by.bntu.laboratory.services.ProjectsService;
+import by.bntu.laboratory.services.TimesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +23,12 @@ public class TagsController {
 
     @Autowired
     private TagsRepository tagsRepository;
-    private final NewsServices newsService;
-    private final TimesServices timesService;
-    private final EventsServices eventCalendarService;
-    private final ProjectsServices projectService;
+    private final NewsService newsService;
+    private final TimesService timesService;
+    private final EventsService eventCalendarService;
+    private final ProjectsService projectService;
 
-    public TagsController(NewsServices newsService, TimesServices timesService, EventsServices eventCalendarService, ProjectsServices projectService) {
+    public TagsController(NewsService newsService, TimesService timesService, EventsService eventCalendarService, ProjectsService projectService) {
         this.newsService = newsService;
         this.timesService = timesService;
         this.eventCalendarService = eventCalendarService;
@@ -41,7 +41,14 @@ public class TagsController {
         // Получаем список новостей по тегу
         List<News> newsList = newsService.findNewsByTagId(tagId);
         model.addAttribute("newsList", newsList);
-        return "views/news-list";
+        return "views/lists/news-list";
+    }
+    @GetMapping("/tag/{tagId}/events")
+    public String viewEventsByTag(@PathVariable("tagId") Long tagId, Model model) {
+        // Получаем список новостей по тегу
+        List<Events> eventsList = eventCalendarService.findEventsByTagId(tagId);
+        model.addAttribute("eventsList", eventsList);
+        return "views/lists/event-list";
     }
 
     @GetMapping("/tag/{tagId}/times")
@@ -49,15 +56,15 @@ public class TagsController {
         // Получаем список времен по тегу
         List<TimesReviews> timesList = timesService.findTimesByTagId(tagId);
         model.addAttribute("timesList", timesList);
-        return "views/times-list";
+        return "views/lists/times-list";
     }
 
     @GetMapping("/tag/{tagId}/calendar")
     public String viewCalendarByTag(@PathVariable("tagId") Long tagId, Model model) {
         // Получаем список событий календаря по тегу
-        List<EventsCalendar> eventCalendarList = eventCalendarService.findEventsByTagId(tagId);
+        List<Events> eventCalendarList = eventCalendarService.findEventsByTagId(tagId);
         model.addAttribute("eventCalendarList", eventCalendarList);
-        return "views/event-list";
+        return "views/lists/event-list";
     }
 
     @GetMapping("/tag/{tagId}/projects")
@@ -65,6 +72,6 @@ public class TagsController {
         // Получаем список проектов по тегу
         List<Projects> projectList = projectService.findProjectsByTagId(tagId);
         model.addAttribute("projectList", projectList);
-        return "views/project-list";
+        return "views/lists/project-list";
     }
 }

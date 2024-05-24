@@ -12,9 +12,4 @@ public interface Publications {
     byte[] cover = new byte[0];
     Date date = null;
 
-    default String generateBase64Image() {
-        String temp = Base64.getEncoder().encodeToString(this.cover);
-        return temp;
-    }
-
 }

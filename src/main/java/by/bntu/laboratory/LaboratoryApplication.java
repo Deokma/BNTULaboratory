@@ -36,6 +36,7 @@ public class LaboratoryApplication {
         // Код инициализации
         createAndSaveRoles();
         createDefaultAdmin();
+        createDefaultWriter();
     }
 
     private void createAndSaveRoles() {
@@ -50,7 +51,32 @@ public class LaboratoryApplication {
             roleRepository.save(writerRole);
         }
     }
+    private void createDefaultWriter() {
+        // Проверяем, есть ли уже администратор в базе данных
+        if (userRepository.count() == 1) {
+            // Находим роли "Admin" и "User" в базе данных
+            Role writerRole = roleRepository.findByName("Writer");
+            Role userRole = roleRepository.findByName("User");
 
+            // Создаем администратора
+            User writerUser = new User();
+            writerUser.setActive(true);
+            writerUser.setEmail("writer@gmail.com");
+            String encodedPassword = passwordEncoder.encode("password"); // Зашифровать пароль
+            writerUser.setPassword(encodedPassword);
+
+            // Создаем коллекцию ролей для администратора
+            Set<Role> roles = new HashSet<>();
+            roles.add(writerRole);
+            roles.add(userRole);
+
+            // Устанавливаем роли для администратора
+            writerUser.setRoles(roles);
+
+            // Сохраняем администратора
+            userRepository.save(writerUser);
+        }
+    }
     private void createDefaultAdmin() {
         // Проверяем, есть ли уже администратор в базе данных
         if (userRepository.count() == 0) {

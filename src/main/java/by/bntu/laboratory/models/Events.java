@@ -1,6 +1,8 @@
 package by.bntu.laboratory.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,8 +11,8 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "events_calendar")
-public class EventsCalendar implements Publications {
+@Table(name = "events")
+public class Events implements Publications {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,21 +31,23 @@ public class EventsCalendar implements Publications {
     @Column(name = "date")
     private Date date;
 
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "events_calendar_tags",
+            name = "events_tags",
             joinColumns = @JoinColumn(
                     name = "event_id", referencedColumnName = "event_id"),
             inverseJoinColumns = @JoinColumn(
                     name = "tag_id", referencedColumnName = "tag_id"))
     private Collection<Tags> tags;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "eventsCalendar")
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "events")
     private PublicationImages cover = new PublicationImages();
     private Long previewImageId;
 
     public void addImageToEvent(PublicationImages coverImage) {
-        coverImage.setEventsCalendar(this);
+        coverImage.setEvents(this);
         cover = coverImage;
     }
+
 }

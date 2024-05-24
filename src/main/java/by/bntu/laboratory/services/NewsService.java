@@ -1,9 +1,7 @@
 package by.bntu.laboratory.services;
 
-import by.bntu.laboratory.models.DataBases;
 import by.bntu.laboratory.models.News;
 import by.bntu.laboratory.models.PublicationImages;
-import by.bntu.laboratory.repo.DataBaseRepository;
 import by.bntu.laboratory.repo.NewsRepository;
 import by.bntu.laboratory.repo.PublicationImageRepository;
 import jakarta.transaction.Transactional;
@@ -18,18 +16,17 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class DataBasesServices {
+public class NewsService {
     @Autowired
-    DataBaseRepository dataBaseRepository;
+    NewsRepository newsRepository;
     @Autowired
     PublicationImageRepository publicationImageRepository;
-    /*public void saveNews(News news, MultipartFile file) throws IOException {
+    public void saveNews(News news, MultipartFile file) throws IOException {
         PublicationImages publicationImages;
         if (file.getSize() != 0) {
             publicationImages = toImageEntity(file);
             publicationImages.setPreviewImage(true);
             news.addImageToNews(publicationImages);
-
         }
         News newsFromDb = newsRepository.save(news);
         newsFromDb.setPreviewImageId(newsFromDb.getCover().getId());
@@ -62,18 +59,32 @@ public class DataBasesServices {
             newsRepository.save(newsFromDb);
 
         }
-    }*/
+    }
 
-    public List<DataBases> getAll() {
-        return dataBaseRepository.findAll();
+
+    private PublicationImages toImageEntity(MultipartFile file) throws IOException {
+        PublicationImages image = new PublicationImages();
+        image.setName(file.getName());
+        image.setOriginalFileName(file.getOriginalFilename());
+        image.setContentType(file.getContentType());
+        image.setSize(file.getSize());
+        image.setBytes(file.getBytes());
+        return image;
     }
-    public Optional<DataBases> findById(Long dbId) {
-        return dataBaseRepository.findById(dbId);
+    @Transactional
+public List<News> findNewsByTagId(Long tagId) {return newsRepository.findByTags_TagId(tagId);}
+    public List<News> getAll() {
+        return newsRepository.findAll();
     }
-    public void deleteDataBase(Long id) {
-        dataBaseRepository.deleteById(id);
+
+    public Optional<News> findById(Long newsId) {
+        return newsRepository.findById(newsId);
     }
-    public boolean isDataBaseListEmptyOrAllHidden(List<DataBases> dataBasesList) {
-        return dataBasesList.isEmpty() || dataBasesList.stream().noneMatch(DataBases::getVisible);
+
+    public void deleteNews(Long id) {
+        newsRepository.deleteById(id);
+    }
+    public boolean isNewsListEmptyOrAllHidden(List<News> newsList) {
+        return newsList.isEmpty() || newsList.stream().noneMatch(News::getVisible);
     }
 }

@@ -9,19 +9,19 @@
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
-<div style="padding-top: 6rem" class="container">
-    <h1>Список обзоров на Times</h1>
-    <div class="row" th:if="${emptyOrAllHidden}">
+<div style="padding-top: 6rem" class="containerL">
+    <h1>Список Times</h1>
+    <div class="rowL" th:if="${emptyOrAllHidden}">
         <div class="centered-message">
             <h2>Обзоры на Times скоро появятся</h2>
         </div>
     </div>
-    <div class="row">
+    <div class="rowL">
         <!-- Iterate over each news item -->
-        <div class="cards" th:each="times : ${timesList}" th:if="${times.visible}">
-            <div class="card news-card">
+        <div class="cardsL" th:each="times : ${timesList}" th:if="${times.visible}">
+            <div class="cardL news-card">
                 <!-- Card body with news title and description -->
-                <a class="card-body" th:href="@{/times/edit/{id}(id=${times.getTimesId()})}">
+                <a class="card-body" th:href="@{/times/{id}(id=${times.getTimesId()})}">
                     <img class="card-image" width="300px"
                          height="165px" th:src="@{/images/{id}(id=${times.getPreviewImageId()})}"></img>
                     <p class="card-data" th:text="${#dates.format(times.date, 'dd.MM.yyyy')}"></p>

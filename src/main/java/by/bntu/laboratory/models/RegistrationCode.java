@@ -19,6 +19,5 @@ public class RegistrationCode {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role; // Ссылка на роль, для которой создан данный код
 
-    // Конструкторы, геттеры и сеттеры...
 }
 

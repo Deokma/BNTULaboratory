@@ -5,7 +5,6 @@ import by.bntu.laboratory.models.Role;
 import by.bntu.laboratory.models.User;
 import by.bntu.laboratory.repo.RegistrationCodeRepository;
 import by.bntu.laboratory.repo.RoleRepository;
-import by.bntu.laboratory.services.RegistrationCodeService;
 import by.bntu.laboratory.services.RoleService;
 import by.bntu.laboratory.services.UserService;
 import lombok.RequiredArgsConstructor;

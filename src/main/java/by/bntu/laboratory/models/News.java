@@ -28,11 +28,6 @@ public class News implements Publications {
     @Column(name = "visible")
     private Boolean visible;
 
-
-   /* @Lob
-    @Column
-    private byte[] cover;*/
-
     @Column(name = "date")
     private Date date;
 
@@ -57,5 +52,8 @@ public class News implements Publications {
     public Collection<Tags> getTags() {
         return tags;
     }
-
+    @Override
+    public String toString() {
+        return "News{id=" + newsId + ", title='" + title + '\'' + ", content='" + content + '\'' + '}';
+    }
 }

@@ -2,8 +2,8 @@ package by.bntu.laboratory.controllers;
 
 import by.bntu.laboratory.models.*;
 import by.bntu.laboratory.repo.*;
-import by.bntu.laboratory.services.NewsServices;
 import jakarta.persistence.EntityManager;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -41,18 +39,19 @@ public class MainController {
     @Autowired
     private PublicationActivitiesRepository publicationActivitiesRepository;
 
+
     /**
      * Go to main page
      */
     @Transactional
     @GetMapping(value = "/", produces = MediaType.IMAGE_JPEG_VALUE)
-    public String main(Model model) {
+    public String main(Model model, HttpServletRequest request) {
         Pageable newsPageable = PageRequest.of(0, 4); // Получаем только последние 4 элемента
         List<News> latestNews = newsRepository.findLast3ByOrderByDateDesc(newsPageable);
         Pageable projectsPageable = PageRequest.of(0, 6); // Получаем только последние 6 элемента
         List<Projects> projectsList = projectsRepository.findAll();
         Pageable eventsPageable = PageRequest.of(0, 3); // Получаем только последние 3 элемента
-        List<EventsCalendar> eventsCalendarsList = eventsRepository.findLast3ByOrderByDateDesc(eventsPageable);
+        List<Events> eventsCalendarsList = eventsRepository.findLast3ByOrderByDateDesc(eventsPageable);
         Pageable timesPageable = PageRequest.of(0, 3); // Получаем только последние 3 элемента
         List<TimesReviews> timesList = timesRepository.findLast3ByOrderByDateDesc(timesPageable);
         List<DataBases> dataBasesList = dataBaseRepository.findTop3ByOrderByDbIdDesc();

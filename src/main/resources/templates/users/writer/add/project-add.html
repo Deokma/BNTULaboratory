@@ -39,7 +39,7 @@
     <div class="card">
         <h1 class="card-header">Добавить проект</h1>
         <div class="card-body">
-            <form action="/writer/project/add" method="post" th:object="${projects}" enctype="multipart/form-data">
+            <form th:action="@{/writer/project/add}" method="post" th:object="${projects}" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title" class="text-dark">Заголовок:</label>
                     <input type="text" name="title" id="title" th:field="*{title}" placeholder="Введите заголовок" class="form-control" required>

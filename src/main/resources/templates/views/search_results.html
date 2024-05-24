@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты поиска</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .centered-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .navbar_container {
+            width: 100%;
+            background-color: rgba(0,0,0,0);
+            align-items: center;
+            padding-left: 5%;
+            padding-right: 5%;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="~{components/header :: header}"></header>
+<div class="containerL">
+    <h1 th:if="${category == 'all'}">Все результаты</h1>
+    <h1 th:if="${category == 'news'}">Список новостей</h1>
+    <h1 th:if="${category == 'projects'}">Список проектов</h1>
+    <h1 th:if="${category == 'database'}">Список баз данных</h1>
+    <h1 th:if="${category == 'eventcalendar'}">Список событий</h1>
+    <h1 th:if="${category == 'timesreview'}">Список Times</h1>
+    <h1 th:if="${category == 'onlineservices'}">Список онлайн-сервисов</h1>
+
+    <div class="rowL" th:if="${#lists.isEmpty(newsResults) && #lists.isEmpty(projectResults) && #lists.isEmpty(databaseResults) && #lists.isEmpty(eventResults) && #lists.isEmpty(timesResults) && #lists.isEmpty(serviceResults)}">
+        <div class="centered-message">
+            <h2>Ничего не найдено</h2>
+        </div>
+    </div>
+
+    <div th:if="${category == 'all' || category == 'news'}">
+        <h2 th:if="${not #lists.isEmpty(newsResults)}">Новости</h2>
+        <div class="rowL">
+            <div class="cardL news-card" th:if="${not #lists.isEmpty(newsResults)}" th:each="news : ${newsResults}">
+                <a th:href="@{/news/{id}(id=${news.newsId})}" class="card-body">
+                    <img class="card-image" width="300px" height="165px" th:src="@{/images/{id}(id=${news.getPreviewImageId()})}">
+                    <p class="card-data" th:text="${#dates.format(news.date, 'dd.MM.yyyy')}"></p>
+                    <h5 class="card-title" th:text="${news.title}"></h5>
+                    <p class="card-text" th:text="${news.description}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${category == 'all' || category == 'projects'}">
+        <h2 th:if="${not #lists.isEmpty(projectResults)}">Проекты</h2>
+        <div class="rowL" >
+            <div class="cardL news-card" th:if="${not #lists.isEmpty(projectResults)}" th:each="project : ${projectResults}">
+                <a th:href="@{/project/{id}(id=${project.projectId})}" class="card-body">
+                    <img class="card-image" width="300px" height="165px" th:src="@{/images/{id}(id=${project.getPreviewImageId()})}">
+                    <h5 class="card-title" th:text="${project.title}"></h5>
+                    <p class="card-text" th:text="${project.description}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${category == 'all' || category == 'database'}">
+        <h2 th:if="${not #lists.isEmpty(databaseResults)}">Базы данных</h2>
+        <div class="rowL" >
+            <div class="cardL news-card" th:if="${not #lists.isEmpty(databaseResults)}" th:each="database : ${databaseResults}">
+                <a th:href="@{/data-base/{id}(id=${database.dataBaseId})}" class="card-body">
+                    <h5 class="card-title" th:text="${database.title}"></h5>
+                    <p class="card-text" th:text="${database.description}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${category == 'all' || category == 'eventcalendar'}">
+        <h2 th:if="${not #lists.isEmpty(eventResults)}">События</h2>
+        <div class="rowL" >
+            <div class="cardL news-card" th:if="${not #lists.isEmpty(eventResults)}" th:each="event : ${eventResults}">
+                <a th:href="@{/event/{id}(id=${event.eventId})}" class="card-body">
+                    <img class="card-image" width="300px" height="165px" th:src="@{/images/{id}(id=${event.getPreviewImageId()})}">
+                    <p class="card-data" th:text="${#dates.format(event.date, 'dd.MM.yyyy')}"></p>
+                    <h5 class="card-title" th:text="${event.title}"></h5>
+                    <p class="card-text" th:text="${event.description}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${category == 'all' || category == 'timesreview'}">
+        <h2 th:if="${not #lists.isEmpty(timesResults)}">Обзоры Times</h2>
+        <div class="rowL" >
+            <div class="cardL news-card" th:if="${not #lists.isEmpty(timesResults)}" th:each="times : ${timesResults}">
+                <a th:href="@{/times/{id}(id=${times.timesId})}" class="card-body">
+                    <img class="card-image" width="300px" height="165px" th:src="@{/images/{id}(id=${times.getPreviewImageId()})}">
+                    <p class="card-data" th:text="${#dates.format(times.date, 'dd.MM.yyyy')}"></p>
+                    <h5 class="card-title" th:text="${times.title}"></h5>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${category == 'all' || category == 'onlineservices'}">
+        <h2 th:if="${not #lists.isEmpty(serviceResults)}">Онлайн-сервисы</h2>
+        <div class="rowL" >
+            <div class="cardL news-card" th:if="${not #lists.isEmpty(serviceResults)}" th:each="service : ${serviceResults}">
+                <a th:href="@{/onlineservices/{id}(id=${service.serviceId})}" class="card-body">
+                    <h5 class="card-title" th:text="${service.title}"></h5>
+                    <p class="card-text" th:text="${service.content}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -10,13 +10,13 @@
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
-<div class="container">
+<div class="containerL">
     <h1>Проекты</h1>
 
     <div class="row-project">
         <!-- Iterate over each news item -->
-        <div class="cards" th:each="project : ${projectsList}" th:if="${!project.visible}">
-            <div class="card news-card" th:classappend="${!project.visible} ? 'hidden'">
+        <div class="cardsL" th:each="project : ${projectsList}" th:if="${!project.visible}">
+            <div class="cardL news-card" th:classappend="${!project.visible} ? 'hidden'">
                 <!-- Card body with news title and description -->
                 <a th:href="@{/writer/project/edit/{id}(id=${project.getProjectId()})}" class="card-body">
                     <img class="card-image" width="300px"

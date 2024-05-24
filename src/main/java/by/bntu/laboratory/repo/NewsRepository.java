@@ -24,4 +24,5 @@ public interface NewsRepository extends JpaRepository<News, Long> {
     List<News> findNewsByTags_TagId(Long tagId);
 
     List<News> findByTags_TagId(Long tagIds);
+    List<News> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String title, String content);
 }

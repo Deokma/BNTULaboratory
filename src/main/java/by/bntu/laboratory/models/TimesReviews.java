@@ -19,11 +19,6 @@ public class TimesReviews implements Publications {
 
     @Column(name = "title")
     private String title;
-    /*@Column(name = "description")
-    private String description;*/
-
-   /* @Column(name = "content", columnDefinition = "TEXT")
-    private String content;*/
 
     @Column(name = "visible")
     private Boolean visible;

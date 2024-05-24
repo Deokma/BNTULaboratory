@@ -24,14 +24,4 @@ public class DataBases implements Publications {
     @Column(name = "visible")
     private Boolean visible;
 
-
-   /* @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "db_tags",
-            joinColumns = @JoinColumn(
-                    name = "db_id", referencedColumnName = "db_id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "tag_id", referencedColumnName = "tag_id"))
-    private Collection<Tags> tags; // Adjusted attribute name to avoid confusion
-*/
 }

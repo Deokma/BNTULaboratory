@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Details</title>
+    <title th:text="${event.getTitle()}"></title>
     <!-- Здесь подключите ваши стили -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/view.css">
 </head>
 <body>
-<!-- Здесь может быть ваш шапка сайта -->
-<div class="container">
-    <!-- Заголовок новости -->
-    <h1 th:text="${events.get().getTitle()}" class="news-title"></h1>
-    <!-- Изображение новости -->
-    <!--    <img th:src="@{/images/{id}(id=${news.getPreviewImageId()})}" alt="" class="news-image">-->
-    <!-- Дата публикации новости -->
-        <p th:text="${#dates.format(events.get().getDate(), 'dd.MM.yyyy')}" class="news-date"></p>
-    <!-- Описание новости -->
-    <!--    <p th:text="${news.description}" class="news-description"></p>-->
-    <!-- Контент новости -->
-    <div th:utext="${events.get().getContent()}" class="news-content"></div>
-    <!-- Кнопка назад -->
-    <a href="#" onclick="history.go(-1);" class="back-button">Back</a>
+<header th:insert="~{components/header :: header}"></header>
+<div class="container" style="padding-top: 6rem;">
+    <div class="content-container">
+        <!-- News Content -->
+        <div class="content">
+            <h1 th:text="${event.title}" class="title"></h1>
+            <p class="tags">
+                Теги:
+                <a th:href="@{/tag/{tagId}/events(tagId=${tag.getTagId()})}" th:each="tag : ${event.getTags()}" class="tag">
+                    #<span th:text="${tag.name}"></span></a>
+            </p>
+            <div th:if="${usersession.hasRole('Writer')}">
+                <a class="news-content-edit" th:href="@{/writer/event/edit/{id}(id=${event.getEventId()})}">Редактировать</a>
+            </div>
+            <div class="date">
+                <p th:text="${#dates.format(event.getDate(), 'dd.MM.yyyy')}"></p>
+            </div>
+            <div th:utext="${event.getContent()}" class="text"></div>
+            <div class="date">
+                <p th:text="${#dates.format(event.getDate(), 'dd.MM.yyyy')}"></p>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

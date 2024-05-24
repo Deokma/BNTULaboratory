@@ -1,6 +1,5 @@
 package by.bntu.laboratory.services;
 
-import by.bntu.laboratory.models.News;
 import by.bntu.laboratory.models.Projects;
 import by.bntu.laboratory.models.PublicationImages;
 import by.bntu.laboratory.repo.ProjectsRepository;
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class ProjectsServices {
+public class ProjectsService {
     @Autowired
     ProjectsRepository projectsRepository;
     @Autowired

@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Новости</title>
+    <title>Times</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="/css/users/writer/hidden/lists.css">
    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -10,13 +10,13 @@
 </head>
 <body>
 <header th:insert="~{components/header :: header}"></header>
-<div class="container">
+<div class="containerL">
     <h1>События</h1>
 
-    <div class="row">
+    <div class="rowL">
         <!-- Iterate over each news item -->
-        <div class="cards" th:each="times : ${timesReviewsList}">
-            <div class="card news-card" th:classappend="${!times.visible} ? 'hidden'">
+        <div class="cardsL" th:each="times : ${timesReviewsList}">
+            <div class="cardL news-card" th:classappend="${!times.visible} ? 'hidden'">
                 <!-- Card body with news title and description -->
                 <a th:href="@{/writer/times/edit/{id}(id=${times.getTimesId()})}" class="card-body">
                     <img class="card-image" width="300px"

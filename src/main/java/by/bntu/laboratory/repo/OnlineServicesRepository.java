@@ -16,5 +16,6 @@ public interface OnlineServicesRepository extends JpaRepository<OnlineServices, 
     OnlineServices findByTitle(String title);
 
     OnlineServices findOnlineServicesByOsID(Long osId);
+    List<OnlineServices> findByTitleContainingIgnoreCase(String title);
 
 }

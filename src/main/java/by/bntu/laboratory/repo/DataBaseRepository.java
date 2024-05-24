@@ -1,7 +1,6 @@
 package by.bntu.laboratory.repo;
 
 import by.bntu.laboratory.models.DataBases;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +16,5 @@ public interface DataBaseRepository extends JpaRepository<DataBases, Long> {
 
     DataBases findDataBasesByDbId(Long dbId);
 
+    List<DataBases> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description);
 }

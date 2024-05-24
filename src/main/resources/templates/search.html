@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Page</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+</head>
+<body>
+<div th:fragment="header">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet'>
+    <div class="navbar_component w-nav" role="banner">
+        <div class="navbar_container">
+            <a href="/" class="navbar_logo-link w-nav-brand" aria-label="home"></a>
+            <nav role="navigation" class="navbar_menu w-nav-menu">
+                <div class="navbar-menu-left">
+                    <div class="navbar-menu-left-content">
+                        <form class="search-form" th:action="@{/search}" method="post">
+                            <div class="search-bar">
+                                <input type="text" name="query" placeholder="Поиск..." class="search-input">
+                                <select name="category" class="search-category">
+                                    <option value="all">Весь сайт</option>
+                                    <option value="news">Новости</option>
+                                    <option value="projects">Проекты</option>
+                                    <option value="database">База данных</option>
+                                    <option value="eventcalendar">Календарь событий</option>
+                                    <option value="timesreview">Обзоры</option>
+                                    <option value="onlineservices">Онлайн сервисы</option>
+                                </select>
+                                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                                <button type="submit" class="search-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                        <path d="M10 2a8 8 0 015.292 13.708l4.26 4.26a1 1 0 01-1.414 1.414l-4.26-4.26A8 8 0 1110 2zm0 2a6 6 0 100 12A6 6 0 0010 4z" fill="#b2b2b2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="navbar-menu-right">
+                    <a class="navbar_link w-nav-link" href="https://naukavdetalyah.tilda.ws/">Проект "Наука в деталях"</a>
+                    <a class="navbar_link w-nav-link" href="https://library.bntu.by/daydzhest/">Дайджест "InfoGenerator"</a>
+                    <a class="navbar_element-contacts w-nav-contact-link" th:href="@{'#footer'}">Контакты</a>
+                </div>
+                <div class="navbar_toggle">☰</div>
+            </nav>
+        </div>
+        <div class="navbar-dropdown">
+            <div class="navbar-dropdown-content">
+                <a class="navbar_dp_link w-nav-link" href="https://naukavdetalyah.tilda.ws/">Проект "Наука в деталях"</a>
+                <a class="navbar_dp_link w-nav-link" href="https://library.bntu.by/daydzhest/">Дайджест "InfoGenerator"</a>
+                <a class="navbar_element-contacts w-nav-contact-link" th:href="@{'#footer'}">Контакты</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+</html>

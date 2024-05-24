@@ -16,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * @author Denis Popolamov
@@ -26,26 +28,18 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationEn
 public class SecurityConfig {
    // private CustomUserDetailsService userDetailsService;
     private final CustomUserDetailsService userDetailsService;
-  //  private final BasicAuthenticationEntryPoint authenticationEntryPoint;
-  //  @Autowired
-    //private RestAuthenticationEntryPoint authenticationEntryPoint;
-  //  BasicAuthenticationEntryPoint authenticationEntryPoint;
+
     @Autowired
     public SecurityConfig(CustomUserDetailsService userDetailsService
                           /*,BasicAuthenticationEntryPoint authenticationEntryPoint*/) {
         this.userDetailsService = userDetailsService;
 //        this.authenticationEntryPoint = authenticationEntryPoint;
     }
-//    @Bean
-//    public BasicAuthenticationEntryPoint basicAuthenticationEntryPoint() {
-//        BasicAuthenticationEntryPoint basicAuthenticationEntryPoint = new BasicAuthenticationEntryPoint();
-//        basicAuthenticationEntryPoint.setRealmName("YOUR REALM");
-//        return basicAuthenticationEntryPoint;
-//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
                         )
@@ -53,13 +47,19 @@ public class SecurityConfig {
                 .authorizeRequests((requests) -> requests
                         .requestMatchers(HttpMethod.GET).permitAll()
                         .requestMatchers(HttpMethod.POST).permitAll()
-                        .requestMatchers("/", "/login", "/registration").permitAll()
+                        .requestMatchers("/", "/login", "/registration","/search").permitAll()
                         .anyRequest().authenticated())
+                .csrf(
+                        csrf -> csrf.csrfTokenRepository(csrfTokenRepository())
+                )
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
-
+    @Bean
+    public CsrfTokenRepository csrfTokenRepository() {
+        return new HttpSessionCsrfTokenRepository();
+    }
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
